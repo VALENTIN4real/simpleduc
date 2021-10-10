@@ -1,6 +1,6 @@
 <?php  
     $config['serveur']='localhost';  
-    $config['login'] = 'login4223';  
-    $config['mdp'] ='lDirVLutHrFQtUP';  
-    $config['bd'] = 'simpleducDB';
+    $config['login'] = 'login8008';  
+    $config['mdp'] ='sfewvlSEmUhZQHt';  
+    $config['bd'] = 'dbSimpleduc';
 ?>
