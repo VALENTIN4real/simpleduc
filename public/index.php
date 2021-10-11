@@ -12,5 +12,5 @@
 
     $db = connect($config);
     $contenu = getPage($db);
-    $contenu($twig,$db);
+    $contenu($twig, $db);
 ?>

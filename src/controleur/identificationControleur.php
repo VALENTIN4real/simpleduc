@@ -25,4 +25,7 @@
     echo $twig->render('connexion.html.twig', array('form'=>$form));
 }
 
+function ajoutUtilisateurControleur($twig){
+    echo $twig->render('ajout-utilisateur.html.twig', array());
+}
 ?>

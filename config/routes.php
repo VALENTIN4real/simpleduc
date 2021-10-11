@@ -4,6 +4,7 @@ function getPage($db){
     $lesPages['accueil'] = "accueilControleur";
     $lesPages['connexion'] = "connexionControleur";
     $lesPages['maintenance'] = "maintenanceControleur";
+    $lesPages['ajout-utilisateur'] = "ajoutUtilisateurControleur";
     
     if($db!=null){
         if (isset($_GET['page'])){
@@ -18,9 +19,11 @@ function getPage($db){
         else{
             $contenu = $lesPages['accueil'];
         }
+
     }else{
-        $contenu = $lesPages['maintenance'];
+       $contenu = $lesPages['maintenance'];
     } 
+
     return $contenu;
 }
 ?>
