@@ -6,21 +6,14 @@
 {% endblock %}
 
 {% block contenu %}
-	<div class="container">
-		<form>
+	<form action="index.php?page=connexion" method="post" enctype="application/x-www-form-
+			urlencoded">
+		<h1>Se connecter</h1>
+		<label for="inputEmail" class="sr-only">Email:</label>
+		    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+		<label for="inputPassword" class="sr-only">Mot de passe:</label>
+		    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" name="connexion">Se connecter</button>
+    </form>
 
-			<h1>Me connecter</h1>
-			<div class="form-group">
-				<label for="exampleInputEmail1">Adresse mail</label>
-				<input type="email" class="form-control" id="mailConnexion" aria-describedby="emailHelp" placeholder="eric.zemmour@gmail.com">
-			</div>
-			<div class="form-group">
-				<label for="exampleInputPassword1">Mot de passe</label>
-				<input type="password" class="form-control" id="mdpConnexion" placeholder="*************">
-			</div>
-            <div class="form-group">
-			    <button type="submit" class="btn btn-primary">Connexion</button>
-            </div>
-		</form>
-	</div>
 {% endblock %}
