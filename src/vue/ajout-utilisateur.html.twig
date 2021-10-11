@@ -7,73 +7,72 @@
 
 {% block contenu %}
 	<div class="container">
-
-		<h1>Ajouter un utilisateur</h1>
-		<form class="needs-validation" novalidate>
-			<div class="form-row">
-				<div class="form-group">
-					<label for="inputPrenom">Prénom</label>
-					<input type="text" class="form-control" id="inputPrenom" placeholder="Prénom" required>
-					<div class="valid-feedback">
-						Semble correct!
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputNom">Nom d'usage</label>
-					<input type="text" class="form-control" id="inputNom" placeholder="Nom d'usage" required>
-					<div class="valid-feedback">
-						Semble correct!
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputMail">Adresse mail</label>
-					<input type="email" class="form-control" id="inputMail" aria-describedby="emailHelp" placeholder="Adresse mail" required>
-					<div class="valid-feedback">
-						Semble correct!
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="username">Nom d'utilisateur</label>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="inputGroupPrepend">@</span>
+			<h1>Ajouter un utilisateur</h1>
+			<form class="needs-validation" novalidate>
+				<div class="form-row">
+					<div class="form-group">
+						<label for="inputPrenom">Prénom</label>
+						<input type="text" class="form-control" id="inputPrenom" placeholder="Prénom" required>
+						<div class="valid-feedback">
+							Semble correct!
 						</div>
-						<input type="text" class="form-control" id="username" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required>
+					</div>
+					<div class="form-group">
+						<label for="inputNom">Nom d'usage</label>
+						<input type="text" class="form-control" id="inputNom" placeholder="Nom d'usage" required>
+						<div class="valid-feedback">
+							Semble correct!
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputMail">Adresse mail</label>
+						<input type="email" class="form-control" id="inputMail" aria-describedby="emailHelp" placeholder="Adresse mail" required>
+						<div class="valid-feedback">
+							Semble correct!
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username">Nom d'utilisateur</label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroupPrepend">@</span>
+							</div>
+							<input type="text" class="form-control" id="username" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required>
+							<div class="invalid-feedback">
+								Veuillez saisir un nom d'utilisateur valide.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputFonction">Fonction</label>
+					<select id="inputFonction" class="form-control">
+						<option selected>Choisir...</option>
+						<option>...</option>
+					</select>
+				</div>
+				<div class="form-row">
+					<div class="form-group">
+						<label for="validationCustom03">Ville</label>
+						<input type="text" class="form-control" id="validationCustom03" placeholder="Ville" required>
 						<div class="invalid-feedback">
-							Veuillez saisir un nom d'utilisateur valide.
+							Veuillez saisir une ville.
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="validationCustom05">Code postal</label>
+						<input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+						<div class="invalid-feedback">
+							Veuillez saisir un code postal valide.
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputFonction">Fonction</label>
-				<select id="inputFonction" class="form-control">
-					<option selected>Choisir...</option>
-					<option>...</option>
-				</select>
-			</div>
-			<div class="form-row">
-				<div class="form-group">
-					<label for="validationCustom03">Ville</label>
-					<input type="text" class="form-control" id="validationCustom03" placeholder="Ville" required>
-					<div class="invalid-feedback">
-						Veuillez saisir une ville.
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="validationCustom05">Code postal</label>
-					<input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-					<div class="invalid-feedback">
-						Veuillez saisir un code postal valide.
-					</div>
-				</div>
-			</div>
-			<button class="btn btn-primary" type="submit">Créer ce compte</button>
-		</form>
-	</div>
+				<button class="btn btn-primary" type="submit">Créer ce compte</button>
+			</form>
+		</div>
 
-	<script>
-		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		<script>
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
 'use strict';
 window.addEventListener('load', function () { // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -90,7 +89,7 @@ form.classList.add('was-validated');
 });
 }, false);
 })();
-	</script>
+		</script>
 
 
-{% endblock %}
+	{% endblock %}
