@@ -1,19 +1,34 @@
 {% extends "base.html.twig" %}
 
-{% block title %} {{ parent() }} Accueil {% endblock %}
+{% block title %}
+	{{ parent() }}
+	Accueil
+{% endblock %}
 
 {% block contenu %}
 
-{% if session.login is defined %}
-    <nav aria-label="...">
-  <ul class="pagination pagination-lg">
-    <li class="page-item" aria-current="page">
-      <span class="page-link">Informations</span>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">random</a></li>
-    <li class="page-item"><a class="page-link" href="#">test</a></li>
-  </ul>
-</nav>
-{% endif %}
+    <br>
+	{% if session.login is defined %}
+		<nav aria-label="...">
+			<ul class="pagination pagination-lg">
+				<li class="page-item" aria-current="page">
+					<a class="page-link" href="?page=accueil&item=info">Informations</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?page=accueil&item=random">random</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="#">test</a>
+				</li>
+			</ul>
+		</nav>
+	{% endif %}
 
- {% endblock %}
+    
+    {% if form.item == "info" %}
+        <div>
+        
+        </div>
+    {% endif %}
+
+{% endblock %}
