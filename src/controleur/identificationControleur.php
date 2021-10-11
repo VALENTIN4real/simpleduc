@@ -13,7 +13,7 @@
                     $form['message'] = 'Login ou mot de passe incorrect';          
                 }else{
                     $_SESSION['login'] = $inputEmail;                 
-                    $_SESSION['role'] = $unEmploye['idRole'];
+                    $_SESSION['role'] = $unEmploye['libelle'];
                     header("Location:index.php");     
                 }         
             }        
@@ -57,6 +57,12 @@ function ajoutUtilisateurControleur($twig,$db){
         
     }
     echo $twig->render('ajout-utilisateur.html.twig', array('listeRole' => $listeRole, 'form'=>$form));
+}
+
+function deconnexionControleur($twig, $db){
+    session_unset();   
+    session_destroy();    
+    header("Location:index.php");
 }
 
 function listeUtilisateurControleur($twig, $db){

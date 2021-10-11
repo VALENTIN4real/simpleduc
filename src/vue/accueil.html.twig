@@ -12,7 +12,7 @@
 		<nav class="" aria-label="...">
 			<ul class="pagination pagination-lg">
 				<li class="page-item" aria-current="page">
-					<a class="page-link" href="?page=accueil&item=info">Page métier</a>
+					<a class="page-link" href="?page=accueil&item=pageMetier">Page métier</a>
 				</li>
 				<li class="page-item">
 					<a class="page-link" href="?page=accueil&item=random">random</a>
@@ -25,10 +25,13 @@
 	{% endif %}
 
 
-	{% if form.item == "info" %}
+	{% if form.item == "pageMetier" %}
+		{% if session.role == "rh" %}
 		<div>
 			<h1>hello</h1>
 		</div>
+		{% endif %}
+		
 		
 	{% elseif form.item == "random" %}
 		<div>
