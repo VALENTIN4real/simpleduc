@@ -61,16 +61,17 @@ body {
                     <h4 class="text-right">Profil de {{employe.nom}} {{employe.prenom}}</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="{{employe.nom}}" disabled></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="{{employe.prenom}}" placeholder="surname"disabled></div>
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{employe.nom}}" disabled></div>
+                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="{{employe.prenom}}"disabled></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""disabled></div>
-                    <div class="col-md-12"><label class="labels">Adresse (ligne 1)</label><input type="text" class="form-control" placeholder="enter address line 1" value=""disabled></div>
-                    <div class="col-md-12"><label class="labels">Adresse (ligne 2)</label><input type="text" class="form-control" placeholder="enter address line 2" value=""disabled></div>
-                    <div class="col-md-12"><label class="labels">Code Postal</label><input type="text" class="form-control" placeholder="enter address line 2" value=""disabled></div>
-                    <div class="col-md-12"><label class="labels">Région / Département</label><input type="text" class="form-control" placeholder="enter address line 2" value=""disabled></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="{{employe.email}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" value="{{employe.numTel}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Adresse (ligne 1)</label><input type="text" class="form-control" value="{{employe.adresse}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Adresse (ligne 2)</label><input type="text" class="form-control" value="{{employe.adresseBis}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Code Postal</label><input type="text" class="form-control" value="{{employe.codePostal}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Région / Département</label><input type="text" class="form-control"  value="{{employe.region}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" value="{{employe.email}}"disabled></div>
+                    <div class="col-md-12"><label class="labels">Statut</label><input type="text" class="form-control" value="{{employe.libelle}}"disabled></div>
                 </div>
             </div>
         </div>
