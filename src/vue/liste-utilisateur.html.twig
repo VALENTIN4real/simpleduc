@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} Gestion des utilisateurs{% endblock %}
+
+{% block contenu %}
+<div class="table-responsive container">
+            <table class="table">
+                <thead>
+                    <tr style="text-align:center;">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Fonction</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Num. Tél</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for employe in listeEmploye %}
+                        <tr style="text-align:center;">
+                            <td>{{employe.id}}</td>
+                            <td>{{employe.nom}}</td>
+                            <td>{{employe.prenom}}</td>
+                            <td>{{employe.libelle}}</td>
+                            <td><a href="mailto:{{employe.email}}">{{employe.email}}</a></td>
+                            <td>{{employe.numTel}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}
