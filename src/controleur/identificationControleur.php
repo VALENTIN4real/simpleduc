@@ -14,7 +14,7 @@
                 }else{
                     $_SESSION['login'] = $inputEmail;                 
                     $_SESSION['role'] = $unEmploye['idRole'];
-                    header("Location:index.php");         
+                    header("Location:index.php");     
                 }         
             }        
             else{     
@@ -27,5 +27,9 @@
 
 function ajoutUtilisateurControleur($twig){
     echo $twig->render('ajout-utilisateur.html.twig', array());
+}
+
+function listeUtilisateurControleur($twig){
+    echo $twig->render('liste-utilisateur.html.twig', array());
 }
 ?>
