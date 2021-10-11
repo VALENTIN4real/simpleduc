@@ -2,4 +2,18 @@
 
 {% block title %} {{ parent() }} Accueil {% endblock %}
 
-{% block contenu %} <h1>Bienvenue sur Simpléduc</h1> {% endblock %}
+{% block contenu %}
+
+{% if session.login is defined %}
+    <nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <li class="page-item" aria-current="page">
+      <span class="page-link">Informations</span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">random</a></li>
+    <li class="page-item"><a class="page-link" href="#">test</a></li>
+  </ul>
+</nav>
+{% endif %}
+
+ {% endblock %}
