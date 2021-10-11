@@ -29,7 +29,11 @@ function ajoutUtilisateurControleur($twig){
     echo $twig->render('ajout-utilisateur.html.twig', array());
 }
 
-function listeUtilisateurControleur($twig){
-    echo $twig->render('liste-utilisateur.html.twig', array());
+function listeUtilisateurControleur($twig, $db){
+    $form = array();
+    $employe = new Employe($db);
+
+    $listeEmploye = $employe->mkUserList();
+    echo $twig->render('liste-utilisateur.html.twig', array('form'=>$form, 'listeEmploye'=>$listeEmploye));
 }
 ?>
