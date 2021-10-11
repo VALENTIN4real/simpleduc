@@ -7,12 +7,12 @@
 
 {% block contenu %}
 
-    <br>
+	<br>
 	{% if session.login is defined %}
-		<nav aria-label="...">
+		<nav class="" aria-label="...">
 			<ul class="pagination pagination-lg">
 				<li class="page-item" aria-current="page">
-					<a class="page-link" href="?page=accueil&item=info">Informations</a>
+					<a class="page-link" href="?page=accueil&item=info">Page métier</a>
 				</li>
 				<li class="page-item">
 					<a class="page-link" href="?page=accueil&item=random">random</a>
@@ -22,14 +22,18 @@
 				</li>
 			</ul>
 		</nav>
-    
 	{% endif %}
 
-    
-    {% if form.item == "info" %}
-        <div>
-        
-        </div>
-    {% endif %}
+
+	{% if form.item == "info" %}
+		<div>
+			<h1>hello</h1>
+		</div>
+		
+	{% elseif form.item == "random" %}
+		<div>
+			<h1>gfreger</h1>
+		</div>
+	{% endif %}
 
 {% endblock %}
