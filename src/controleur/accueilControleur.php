@@ -7,7 +7,6 @@ function accueilControleur($twig,$db){
     if(isset($_GET['item'])){
         $form['item'] = $_GET['item'];
     }
-    var_dump($_SESSION['role']);
     echo $twig->render('accueil.html.twig', array('form' => $form));
 }
 ?>
