@@ -3,6 +3,8 @@
 {% block title %}{{ parent() }} Gestion des utilisateurs{% endblock %}
 
 {% block contenu %}
+{% if session.login is defined %}
+		{% if session.role == "rh" %}
 <div class="table-responsive container">
             <table class="table">
                 <thead>
@@ -30,4 +32,10 @@
                 </tbody>
             </table>
         </div>
+        {% else %}
+			<h1>Vous n'avez pas accès à cette page.</h1>
+		{% endif %}
+	{% else %}
+		<h1>Veuillez vous connecter avant d'accéder à cette page.</h1>
+	{% endif %}
 {% endblock %}

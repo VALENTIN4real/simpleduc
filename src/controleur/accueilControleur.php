@@ -7,7 +7,11 @@ function accueilControleur($twig,$db){
     if(isset($_GET['item'])){
         $form['item'] = $_GET['item'];
     }
-    var_dump($_SESSION['role']);
-    echo $twig->render('accueil.html.twig', array('form' => $form));
+    $employe = new Employe($db);
+    $listeEmploye = $employe->mkUserList();
+
+    $role = new Role($db);
+    $listeRole = $role->select();
+    echo $twig->render('accueil.html.twig', array('form' => $form, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole));
 }
 ?>

@@ -22,12 +22,17 @@
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="?page=accueil">Accueil</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="?page=ajout-utilisateur">Créer un compte</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="?page=liste-utilisateurs">Liste utilisateurs</a>
-						</li>
+
+						{% if session.login is defined %}
+							{% if session.role == "rh" %}
+								<li class="nav-item">
+									<a class="nav-link" href="?page=ajout-utilisateur">Créer un compte</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="?page=liste-utilisateurs">Liste utilisateurs</a>
+								</li>
+							{% endif %}
+						{% endif %}
 					</ul>
 				</div>
 				{% if session.login is defined %}
