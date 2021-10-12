@@ -27,150 +27,130 @@
 
 	{% if form.item == "pageMetier" %}
 		{% if session.role == "rh" %}
-			<div class="container-fluid">
-				<h1>Ajouter un utilisateur</h1>
-				<form action="index.php?page=ajout-utilisateur" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
-					<div class="form-row">
-						<div class="form-group">
-							<label for="inputPrenom">Prénom</label>
-							<input type="text" class="form-control" id="inputPrenom" name="inputPrenom" placeholder="Prénom" required>
-							<div class="valid-feedback">
-								Semble correct!
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputNom">Nom</label>
-							<input type="text" class="form-control" id="inputNom" name="inputNom" placeholder="Nom d'usage" required>
-							<div class="valid-feedback">
-								Semble correct!
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputMail">Adresse mail</label>
-							<input type="email" class="form-control" id="inputMail" name="inputEmail" aria-describedby="emailHelp" placeholder="Adresse mail" required>
-							<div class="valid-feedback">
-								Semble correct!
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword">Mot de passe</label>
-							<input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Mot de passe" required>
-							<div class="valid-feedback">
-								Semble correct!
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="username">Numéro de téléphone</label>
-							<div class="input-group">
-								<input type="text" class="form-control" id="numTel" name="inputTel" placeholder="Numéro de téléphone" required>
-								<div class="invalid-feedback">
-									Veuillez saisir un numéro de téléphone valide.
+			<div class="container">
+				<div class="row">
+				<div class="col-4">
+				<h1 style="text-align:center;">Créer un compte</h1>
+					<form action="index.php?page=ajout-utilisateur" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
+							<div class="form-group">
+								<label for="inputPrenom">Prénom</label>
+								<input type="text" class="form-control" id="inputPrenom" name="inputPrenom" placeholder="Prénom" required>
+								<div class="valid-feedback">
+									Semble correct!
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputFonction">Fonction</label>
-						<select id="inputFonction" name="selectRole" class="form-control">
-							{% for role in listeRole %}
-								<option value={{role.id}}>{{role.libelle}}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="form-row">
-						<div class="form-group">
-							<label for="validationCustom03">Adresse</label>
-							<input type="text" class="form-control" id="validationCustom03" name="inputAdresse" placeholder="Adresse" required>
-							<div class="invalid-feedback">
-								Veuillez saisir une ville.
-							</div>
-						</div>
-						<div class="form-row">
 							<div class="form-group">
-								<label for="validationCustom03">Adresse bis</label>
-								<input type="text" class="form-control" id="validationCustom03" name="inputAdresseBis" placeholder="Adresse bis" required>
+								<label for="inputNom">Nom</label>
+								<input type="text" class="form-control" id="inputNom" name="inputNom" placeholder="Nom d'usage" required>
+								<div class="valid-feedback">
+									Semble correct!
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputMail">Adresse mail</label>
+								<input type="email" class="form-control" id="inputMail" name="inputEmail" aria-describedby="emailHelp" placeholder="Adresse mail" required>
+								<div class="valid-feedback">
+									Semble correct!
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword">Mot de passe</label>
+								<input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Mot de passe" required>
+								<div class="valid-feedback">
+									Semble correct!
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="username">Numéro de téléphone</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="numTel" name="inputTel" placeholder="Numéro de téléphone" required>
+									<div class="invalid-feedback">
+										Veuillez saisir un numéro de téléphone valide.
+									</div>
+								</div>
+							</div>
+							<label for="inputFonction">Fonction</label>
+							<select id="inputFonction" name="selectRole" class="form-control">
+								{% for role in listeRole %}
+									<option value={{role.id}}>{{role.libelle}}</option>
+								{% endfor %}
+							</select>
+							<div class="form-group">
+								<label for="validationCustom03">Adresse</label>
+								<input type="text" class="form-control" id="validationCustom03" name="inputAdresse" placeholder="Adresse" required>
 								<div class="invalid-feedback">
 									Veuillez saisir une ville.
 								</div>
-							</div>
-							<div class="form-row">
 								<div class="form-group">
-									<label for="validationCustom03">Région</label>
-									<input type="text" class="form-control" id="validationCustom03" name="inputRegion" placeholder="Région" required>
+									<label for="validationCustom03">Adresse bis</label>
+									<input type="text" class="form-control" id="validationCustom03" name="inputAdresseBis" placeholder="Adresse bis" required>
 									<div class="invalid-feedback">
-										Veuillez saisir une région.
+										Veuillez saisir une ville.
+									</div>
+
+									<div class="form-group">
+										<label for="validationCustom03">Région</label>
+										<input type="text" class="form-control" id="validationCustom03" name="inputRegion" placeholder="Région" required>
+										<div class="invalid-feedback">
+											Veuillez saisir une région.
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="validationCustom05">Code postal</label>
+										<input type="text" class="form-control" id="validationCustom05" name="inputCP" placeholder="Zip" required>
+										<div class="invalid-feedback">
+											Veuillez saisir un code postal valide.
+										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="validationCustom05">Code postal</label>
-									<input type="text" class="form-control" id="validationCustom05" name="inputCP" placeholder="Zip" required>
-									<div class="invalid-feedback">
-										Veuillez saisir un code postal valide.
-									</div>
-								</div>
-							</div>
-						</br>
-						<button class="btn btn-primary" name="inscription" type="submit">Créer ce compte</button>
+							</br>
+							<button class="btn btn-primary" name="inscription" type="submit">Créer ce compte</button>
+							</br>
+						</div>
+					</form>
+				</div>
+
+					<div class="table-responsive col-8">
+					<h1 style="text-align:center;">Liste des utilisateurs</h1>
+						<table class="table">
+							<thead>
+								<tr style="text-align:center;">
+									<th scope="col">ID</th>
+									<th scope="col">Nom</th>
+									<th scope="col">Prénom</th>
+									<th scope="col">Fonction</th>
+									<th scope="col">Email</th>
+									<th scope="col">Num. Tél</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{% for employe in listeEmploye %}
+									<tr style="text-align:center;">
+										<td>{{employe.id}}</td>
+										<td>{{employe.nom}}</td>
+										<td>{{employe.prenom}}</td>
+										<td>{{employe.libelle}}</td>
+										<td>
+											<a href="mailto:{{employe.email}}">{{employe.email}}</a>
+										</td>
+										<td>{{employe.numTel}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 					</div>
 				</div>
-			</form>
-			</div>
-		<script>
-			// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-'use strict';
-window.addEventListener('load', function () { // Fetch all the forms we want to apply custom Bootstrap validation styles to
-var forms = document.getElementsByClassName('needs-validation');
-// Loop over them and prevent submission
-var validation = Array.prototype.filter.call(forms, function (form) {
-form.addEventListener('submit', function (event) {
-if (form.checkValidity() === false) {
-event.preventDefault();
-event.stopPropagation();
-}
-form.classList.add('was-validated');
-}, false);
-});
-}, false);
-})();
-		</script>
+			
 
-			<div class="table-responsive">
-				<table class="table">
-					<thead>
-						<tr style="text-align:center;">
-							<th scope="col">ID</th>
-							<th scope="col">Nom</th>
-							<th scope="col">Prénom</th>
-							<th scope="col">Fonction</th>
-							<th scope="col">Email</th>
-							<th scope="col">Num. Tél</th>
-						</tr>
-					</thead>
+		{% else %}
+			<h1>Veuillez vous connecter avant d'accéder à cette page.</h1>
+		{% endif %}
 
-					<tbody>
-						{% for employe in listeEmploye %}
-							<tr style="text-align:center;">
-								<td>{{employe.id}}</td>
-								<td>{{employe.nom}}</td>
-								<td>{{employe.prenom}}</td>
-								<td>{{employe.libelle}}</td>
-								<td>
-									<a href="mailto:{{employe.email}}">{{employe.email}}</a>
-								</td>
-								<td>{{employe.numTel}}</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-	{% else %}
-		<h1>Veuillez vous connecter avant d'accéder à cette page.</h1>
+
+	{% elseif form.item == "random" %}
+		<div>
+			<h1>gfreger</h1>
+		</div>
 	{% endif %}
-
-
-{% elseif form.item == "random" %}
-	<div>
-		<h1>gfreger</h1>
-	</div>
-{% endif %}{% endblock %}
+{% endblock %}
