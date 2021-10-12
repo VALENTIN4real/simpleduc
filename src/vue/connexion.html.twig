@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block contenu %}
+	{% if session.login is not defined %}
 	<form action="index.php?page=connexion" method="post" enctype="application/x-www-form-
 			urlencoded">
 		<h1>Se connecter</h1>
@@ -20,7 +21,11 @@
 		    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
 		<label for="inputPassword" class="sr-only">Mot de passe:</label>
 		    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+		</br>
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="connexion">Se connecter</button>
     </form>
+	{% else %}
+		<h1 style="text-align:center;">Vous êtes déjà connecté </h1>
+	{% endif %}
 
 {% endblock %}
