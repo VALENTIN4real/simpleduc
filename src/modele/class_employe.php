@@ -15,7 +15,7 @@ class Employe{
         $this->select = $db->prepare("select E.id, email, nom, prenom, idRole, libelle  from Employe E, Role R where E.idRole = R.id order by email");
         $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id");
         $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
-        $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id");
+        $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id ORDER BY libelle, nom");
         $this->update  =  $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, region=:region, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
     }
 
