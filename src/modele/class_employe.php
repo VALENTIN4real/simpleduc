@@ -16,14 +16,24 @@ class Employe{
         $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id");
         $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
         $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id");
-        
+        $this->update  =  $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, region=:region, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
     }
 
     public function insert($role,$idCompte, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal){ // Étape 3         
         $r = true;        
-        $this->insert->execute(array(':role'=>$role,':idCompte'=>$idCompte, ':nom'=>$nom,':prenom'=>$prenom,'adresse'=>$adresse,'adresseBis'=>$adresseBis,'region'=>$region,'numTel'=>$numTel,'codePostal'=>$codePostal));        
+        $this->insert->execute(array(':role'=>$role,':idCompte'=>$idCompte, ':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':region'=>$region,':numTel'=>$numTel,':codePostal'=>$codePostal));        
         if ($this->insert->errorCode()!=0){
             print_r($this->insert->errorInfo());               
+            $r=false;        
+        }        
+        return $r; 
+    }
+
+    public function update($role, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal,$email,$id){ // Étape 3         
+        $r = true;        
+        $this->update->execute(array(':role'=>$role,':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':region'=>$region,':numTel'=>$numTel,':codePostal'=>$codePostal,':email'=>$email,':id'=>$id));        
+        if ($this->update->errorCode()!=0){
+            print_r($this->update->errorInfo());               
             $r=false;        
         }        
         return $r; 

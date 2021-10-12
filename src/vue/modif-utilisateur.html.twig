@@ -86,16 +86,18 @@
 							<div class="col-md-12">
 								<label class="labels">Email ID</label><input type="text" class="form-control" name="inputEmail" value="{{employe.email}}"></div>
 							<div class="col-md-12">
-								<label class="labels" name="selectRole">Fonction}}</label>
-								<select class="form-control">
+								<label class="labels">Fonction</label>
+								<select class="form-control" name="selectRole">
 									{% for role in listeRole %}
 										<option value={{role.id}}>{{role.libelle}}</option>
 									{% endfor %}
 								</select>
 							</div>
 						</div>
+						<div class="col-md-12">
+						<input type="hidden" class="form-control" name="id" value="{{employe.id}}"></div>
 					</br>
-					<button class="btn btn-primary" name="inscription" type="submit">Modifier</button>
+					<button class="btn btn-primary" name="modification" type="submit">Modifier</button>
 				</div>
 			</form>
 		</div>

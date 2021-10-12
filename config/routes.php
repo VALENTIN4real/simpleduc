@@ -8,7 +8,7 @@ function getPage($db){
     $lesPages['profil'] = "profilControleur";
     $lesPages['liste-utilisateurs'] = "listeUtilisateurControleur";
     $lesPages['deconnexion'] = "deconnexionControleur";
-    $lesPages['modif-utilisateur'] = "modfiUtilisateurControleur";
+    $lesPages['modif-utilisateur'] = "modifUtilisateurControleur";
     
     if($db!=null){
         if (isset($_GET['page'])){
