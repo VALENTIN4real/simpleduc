@@ -14,7 +14,7 @@
                 }else{
                     $_SESSION['login'] = $inputEmail;                 
                     $_SESSION['role'] = $unEmploye['libelle'];
-                    header("Location:index.php");     
+                    header("Location:index.php?page=accueil&item=pageMetier");     
                 }         
             }        
             else{     
