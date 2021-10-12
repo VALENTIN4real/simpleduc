@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block contenu %}
+	{% if session.login is not defined %}
 	<form action="index.php?page=connexion" method="post" enctype="application/x-www-form-
 			urlencoded">
 		<h1>Se connecter</h1>
@@ -23,5 +24,8 @@
 		</br>
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="connexion">Se connecter</button>
     </form>
+	{% else %}
+		<h1 style="text-align:center;">Vous êtes déjà connecté </h1>
+	{% endif %}
 
 {% endblock %}

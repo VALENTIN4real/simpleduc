@@ -5,6 +5,8 @@ class Employe{
     private $connect;
     private $select;
     private $selectByAccount;
+    private $selectByID;
+    private $update;
 
     public function __construct($db){        
         $this->db = $db;    
@@ -12,7 +14,9 @@ class Employe{
         $this->connect = $this->db->prepare("select   C.email,   E.idRole, libelle, C.mdp from Employe E, Compte C, Role R WHERE R.id = E.idRole AND E.idCompte = C.id and C.email=:email");
         $this->select = $db->prepare("select E.id, email, nom, prenom, idRole, libelle  from Employe E, Role R where E.idRole = R.id order by email");
         $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id");
+        $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
         $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id");
+        
     }
 
     public function insert($role,$idCompte, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal){ // Étape 3         
@@ -46,6 +50,14 @@ class Employe{
             print_r($this->selectByAccount->errorInfo());          
         }        
         return $this->selectByAccount->fetch();    
+    }
+
+    public function selectByID($id){        
+        $this->selectByID->execute(array(':id'=>$id));        
+        if ($this->selectByID->errorCode()!=0){             
+            print_r($this->selectByID->errorInfo());          
+        }        
+        return $this->selectByID->fetch();    
     }
 
     public function mkUserList(){
