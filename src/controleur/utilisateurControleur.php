@@ -71,7 +71,7 @@
                     $form['message'] = 'Erreur de modif';
                     exit;        
                 }else{
-                    header('Location:index.php?page=accueil');
+                    header('Location:index.php?page=accueil&item=pageMetier');
                 }
         }
         echo $twig->render('modif-utilisateur.html.twig', array('employe'=>$unEmploye,'listeRole'=>$listeRole));
