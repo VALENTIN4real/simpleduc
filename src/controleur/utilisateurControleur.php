@@ -12,6 +12,14 @@
         echo $twig->render('liste-utilisateur.html.twig', array('form'=>$form, 'listeEmploye'=>$listeEmploye));
     }
 
+    function listeUtilisateurControleurIna($twig, $db){
+        $form = array();
+        $employe = new Employe($db);
+    
+        $listeEmployeIna = $employe->mkUserListIna();
+        echo $twig->render('liste-utilisateur.html.twig', array('form'=>$form, 'listeEmployeIna'=>$listeEmployeIna));
+    }
+
     function modifUtilisateurControleur($twig, $db){
         $form = array();
         $role = new Role($db);

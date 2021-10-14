@@ -129,6 +129,14 @@
 
 			<div class="table-responsive col-8">
 				<h1 style="text-align:center;">Liste des utilisateurs</h1>
+				<label for="inputFonction">État des utilisateurs</label>
+					<select id="selectEtat" name="selectEtat" class="form-control">
+							<option value="0">Actif</option>
+							<option value="1">Inactif</option>
+					</select>
+					<button onclick="test()" class="btn btn-primary" name="testButton" id="test">Basculer</button>
+
+					
 				<table class="table">
 					<thead>
 						<tr style="text-align:center;">
@@ -138,7 +146,8 @@
 							<th scope="col">Fonction</th>
 							<th scope="col">Email</th>
 							<th scope="col">Num. Tél</th>
-							<th scope="col"></th>
+							<th scope="col">Administrer</th>
+							<th scope="col">État</th>
 						</tr>
 					</thead>
 
@@ -160,6 +169,7 @@
 										</svg>
 									</a>
 								</td>
+								<td scope="col">{{employe.estInactif}}</td>
 							</tr>
 						{% endfor %}
 					</tbody>
