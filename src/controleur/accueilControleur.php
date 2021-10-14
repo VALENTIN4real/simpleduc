@@ -42,6 +42,7 @@ function accueilControleur($twig,$db){
         }else {
             $form['valide'] = false;            
             $form['message'] = 'Les mots de passes ne concordent pas';
+            header('Location:index.php?page=accueil&item=pageMetier');
             
         }
     }

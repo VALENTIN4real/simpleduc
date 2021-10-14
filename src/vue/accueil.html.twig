@@ -27,16 +27,16 @@
 		</nav>
 	{% endif %}
 
-			{% if form.valide is defined %}
+
+	{% if form.item == "pageMetier" %}
+		{% if session.role == "Ressources Humaines" %}
+		{% if form.valide is defined %}
 				{% if form.valide == false %}
 				<div class="alert alert-danger" role="alert">
 					{{form.message}}
 				</div>
 				{% endif %}
 			{% endif %}
-
-	{% if form.item == "pageMetier" %}
-		{% if session.role == "Ressources Humaines" %}
 			<div class="container">
 				<div class="row">
 					<div class="col-4">
