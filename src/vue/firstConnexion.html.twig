@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	Modifier mot de passe
+{% endblock %}
+
+{% block contenu %}
+	{% if form.valide is defined %}
+		{% if form.valide == false %}
+			<div class="alert alert-danger" role="alert">
+				{{form.message}}
+			</div>
+		{% endif %}
+	{% endif %}
+	<form action="index.php?page=firstConnexion&id={{form.id}}" method="post" enctype="application/x-www-form-
+						urlencoded">
+		<h1>Modifier votre mot de passe</h1>
+		<label for="mdp" class="sr-only">Mot de passe:</label>
+		<input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required autofocus>
+		<label for="inputPassword" class="sr-only">Confirmer votre mot de passe:</label>
+		<input type="password" id="inputConfPassword" name="inputConfPassword" class="form-control" placeholder="Confirmer" required>
+	</br>
+	<button class="btn btn-lg btn-primary btn-block" type="submit" name="modifier">Changer mot de passe</button>
+</form>{% endblock %}

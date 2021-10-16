@@ -1,7 +1,6 @@
 <?php
 function accueilControleur($twig,$db){
     $form = array();
-    
 
     if($_SESSION['login'] == null){
         header("Location:?page=connexion");     
@@ -21,6 +20,8 @@ function accueilControleur($twig,$db){
 
         $form['valide'] = true;            
         $form['message'] = 'Employé supprimé';
+
+        header("Location:?page=accueil&item=1");  
                     
     }
     
@@ -42,16 +43,24 @@ function accueilControleur($twig,$db){
         $dateInscription = date('Y-m-d');
         if($inputPassword == $inputConfPassword){
             $execCompte = $compte->insert($inputEmail,password_hash($inputPassword, PASSWORD_DEFAULT));
-            if($execCompte){
-                $unCompte = $compte->getbyID($inputEmail);
+            if (!$execCompte){      
+                $form['valide'] = false;            
+                $form['message'] = 'Problème d\'insertion dans la table';
+                exit;
+            }else{
+                $unCompte = $compte->getID($inputEmail);
                 $execEmploye = $employe->insert($selectRole,$unCompte['id'],$inputNom,$inputPrenom,$inputAdresse,$inputAdresseBis,$inputRegion,$inputTel,$inputCP,$dateInscription);
                 if (!$execEmploye){          
                     $form['valide'] = false;            
-                    $form['message'] = 'Problème d\'insertion dans la table utilisateur ';      
-                }else {
-                    header("Location:index.php?page=accueil&item=1"); 
+                    $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
+                    exit;
                 }
-            }
+                header("Location:index.php?page=accueil&item=1"); 
+            }     
+        }else {
+            $form['valide'] = false;
+            $form['message'] = 'UWU ';
+            header("Location:index.php?page=accueil&item=1"); 
         }
     }
     $role = new Role($db);

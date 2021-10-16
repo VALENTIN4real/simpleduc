@@ -8,13 +8,22 @@
             $employe = new Employe($db);        
             $unEmploye = $employe->connect($inputEmail);
             if ($unEmploye!=null){ 
-                if($inputPassword != $unEmploye['mdp']){
+                if(!password_verify($inputPassword,$unEmploye['mdp'])){
                     $form['valide'] = false;              
                     $form['message'] = 'Login ou mot de passe incorrect';          
                 }else{
-                    $_SESSION['login'] = $inputEmail;                 
-                    $_SESSION['role'] = $unEmploye['libelle'];
-                    header("Location:index.php?page=accueil&item=pageMetier");     
+                    $compte = new Compte($db);
+                    $firstConnexion = $compte->getFirstConnexion($inputEmail);
+                    $firstConnexion = $firstConnexion[0];
+                    $firstConnexion = intval($firstConnexion);
+                    $idCompte = $compte->getID($inputEmail);
+                    if($firstConnexion == 1){
+                        header("Location:index.php?page=firstConnexion&id=".$idCompte['id']);
+                    }else {
+                        $_SESSION['login'] = $inputEmail;                 
+                        $_SESSION['role'] = $unEmploye['libelle'];
+                        header("Location:index.php?page=accueil&item=pageMetier");
+                    }      
                 }         
             }        
             else{     

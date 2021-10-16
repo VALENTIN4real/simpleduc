@@ -15,7 +15,7 @@ class Employe{
     public function __construct($db){        
         $this->db = $db;    
         $this->insert = $this->db->prepare("insert  into  Employe(nom,  prenom,  idRole,idCompte,adresse,adresseBis,region,numTel,codePostal,dateInscription)values (:nom, :prenom, :role,:idCompte,:adresse,:adresseBis,:region,:numTel,:codePostal,:dateInscription)");
-        $this->connect = $this->db->prepare("select   C.email,   E.idRole, libelle, C.mdp from Employe E, Compte C, Role R WHERE R.id = E.idRole AND E.idCompte = C.id and C.email=:email");
+        $this->connect = $this->db->prepare("select   E.id, C.email,   E.idRole, libelle, C.mdp from Employe E, Compte C, Role R WHERE R.id = E.idRole AND E.idCompte = C.id and C.email=:email");
         $this->select = $db->prepare("select E.id, email, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id order by email");
         $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte, dateInscription FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id");
         $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte,dateInscription FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
