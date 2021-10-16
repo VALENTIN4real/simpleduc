@@ -9,32 +9,38 @@
 
 	<br>
 	{% if session.login is defined %}
-		<nav class="" aria-label="...">
-			<ul class="pagination pagination-lg">
-				<li class="page-item" aria-current="page">
-					<a class="page-link" href="?page=accueil&item=pageMetier">Page métier</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="?page=accueil&item=random">random</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="https://la1ere.francetvinfo.fr/guadeloupe/le-vaccinobus-nouvel-outil-de-la-proximite-vaccinale-1095034.html">VACCIBUS</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
-				</li>
-			</ul>
-		</nav>
+		{% if session.role == "Ressources Humaines" %}
+			<nav class="" aria-label="...">
+				<ul class="pagination pagination-lg">
+					<li class="page-item" aria-current="page">
+						<a class="page-link" href="?page=accueil&item=1">Page métier</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="?page=accueil&item=2">Archives</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="https://la1ere.francetvinfo.fr/guadeloupe/le-vaccinobus-nouvel-outil-de-la-proximite-vaccinale-1095034.html">VACCIBUS</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
+					</li>
+				</ul>
+			</nav>
+		{% endif %}
 	{% endif %}
 
 
-	{% if form.item == "pageMetier" %}
+	{% if form.item == "1" %}
 		{% if session.role == "Ressources Humaines" %}
-		{% if form.valide is defined %}
-				{% if form.valide == false %}
-				<div class="alert alert-danger" role="alert">
-					{{form.message}}
-				</div>
+			{% if form.valide is defined %}
+				{% if form.valide == true %}
+					<div class="alert alert-info" role="alert">
+						{{form.message}}
+					</div>
+				{% else %}
+					<div class="alert alert-danger" role="alert">
+						{{form.message}}
+					</div>
 				{% endif %}
 			{% endif %}
 			<div class="container">
@@ -129,14 +135,8 @@
 
 			<div class="table-responsive col-8">
 				<h1 style="text-align:center;">Liste des utilisateurs</h1>
-				<label for="inputFonction">État des utilisateurs</label>
-					<select id="selectEtat" name="selectEtat" class="form-control">
-							<option value="0">Actif</option>
-							<option value="1">Inactif</option>
-					</select>
-					<button onclick="test()" class="btn btn-primary" name="testButton" id="test">Basculer</button>
 
-					
+
 				<table class="table">
 					<thead>
 						<tr style="text-align:center;">
@@ -146,8 +146,9 @@
 							<th scope="col">Fonction</th>
 							<th scope="col">Email</th>
 							<th scope="col">Num. Tél</th>
-							<th scope="col">Administrer</th>
 							<th scope="col">État</th>
+							<th scope="col">Administrer</th>
+
 						</tr>
 					</thead>
 
@@ -162,6 +163,7 @@
 									<a href="mailto:{{employe.email}}">{{employe.email}}</a>
 								</td>
 								<td>{{employe.numTel}}</td>
+								<td scope="col">{{employe.estInactif}}</td>
 								<td>
 									<a class="bi bi-brush-fill" href="?page=modif-utilisateur&id={{employe.id}}">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brush-fill" viewbox="0 0 16 16">
@@ -169,22 +171,54 @@
 										</svg>
 									</a>
 								</td>
-								<td scope="col">{{employe.estInactif}}</td>
-							</tr>
-						{% endfor %}
+								{% if employe.estInactif == 1%}
+									<td scope="col">
+										<a class="page-link" href="?page=accueil&item=1&idDel={{employe.id}}">X</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						</tbody>
 					</tbody>
 				</table>
 			</div>
 		</div>
 
 
-	{% else %}
-		
+		{% else %}
+
 	{% endif %}
 
 
-{% elseif form.item == "random" %}
-	<div>
-		<h1>gfreger</h1>
-	</div>
-{% endif %}{% endblock %}
+{% elseif form.item == "2" %}
+	{% if session.role == "Ressources Humaines" %}
+	<h1 style="text-align:center">Archive des anciens employés</h1>
+		<table class="table">
+			<thead>
+				<tr style="text-align:center;">
+					<th scope="col">ID</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Prénom</th>
+					<th scope="col">Adresse</th>
+					<th scope="col">Région</th>
+					<th scope="col">Num. Tél</th>
+					<th scope="col">Code Postal</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				{% for employeArchive in listeEmployeArchives %}
+					<tr style="text-align:center;">
+						<td>{{employeArchive.id}}</td>
+						<td>{{employeArchive.nom}}</td>
+						<td>{{employeArchive.adresse}}</td>
+						<td>{{employeArchive.adresseBis}}</td>
+						<td>{{employeArchive.region}}</td>
+						<td>{{employeArchive.numTel}}</td>
+						<td>{{employeArchive.codePostal}}</td>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</tbody>
+	</table>
+
+{% endif %}{% endif %}{% endblock %}

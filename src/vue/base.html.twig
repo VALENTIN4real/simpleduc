@@ -22,25 +22,20 @@
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="?page=accueil">Accueil</a>
 						</li>
-
-						{% if session.login is defined %}
-							{% if session.role == "rh" %}
-								
-							{% endif %}
-						{% endif %}
+				
 					</ul>
 				</div>
 				{% if session.login is defined %}
-					<li>
+					<div>
 						<a class="btn btn-danger" href="?page=deconnexion">Se deconnecter</a>
-					</li>
-					<li>
+					</div>
+					<div>
 						<a class="btn btn-primary" href="?page=profil">Profil</a>
-					</li>
+					</div>
 				{% else %}
-					<li>
+					<div>
 						<a class="btn btn-primary" href="?page=connexion">Me connecter</a>
-					</li>
+					</div>
 				{% endif %}
 			</div>
 		</nav>

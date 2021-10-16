@@ -5,12 +5,14 @@ class Compte{
     private $connect;
     private $select;
     private $getbyID;
+    private $delete;
 
     public function __construct($db){        
         $this->db = $db;    
         $this->insert = $this->db->prepare("insert  into  Compte(email,mdp)values (:email,:mdp)");
         $this->select = $db->prepare("SELECT * FROM Compte");
         $this->getbyID = $db->prepare("SELECT id FROM Compte WHERE email=:email");
+        $this->delete = $db->prepare("DELETE FROM Compte WHERE id=:id");
     }
 
     public function insert($email,$mdp){ // Étape 3         
@@ -37,6 +39,19 @@ class Compte{
             print_r($this->getbyID->errorInfo());          
         }        
         return $this->getbyID->fetch();    
+    }
+
+    public function delete($id){
+        $r = true;
+        $this->delete->execute(array(':id'=>$id));
+
+        if($this->delete->errorCode()!=0){
+            print_r($this->delete->errorInfo());
+            $r = false;
+        }
+
+        return $r;
+
     }
 }
 
