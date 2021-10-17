@@ -6,9 +6,10 @@
 {% endblock %}
 
 {% block contenu %}
+<div class="container col-5 p-5">
 	{% if session.login is not defined %}
-	<form action="index.php?page=connexion" method="post" enctype="application/x-www-form-
-			urlencoded">
+	<form action="index.php?page=connexion" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="text-center">
 		<h1>Se connecter</h1>
 		{% if form.valide is defined %}
 			{% if form.valide == false %}
@@ -17,15 +18,16 @@
 			</div>
 			{% endif %}
 		{% endif %}
-		<label for="inputEmail" class="sr-only">Email:</label>
+		<label for="inputEmail" class="sr-only">Email</label>
 		    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
-		<label for="inputPassword" class="sr-only">Mot de passe:</label>
+		<label for="inputPassword" class="sr-only">Mot de passe</label>
 		    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
 		</br>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" name="connexion">Se connecter</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" name="connexion">Se connecter</button>
+		</div>
     </form>
 	{% else %}
 		<h1 style="text-align:center;">Vous êtes déjà connecté </h1>
 	{% endif %}
-
+</div>
 {% endblock %}

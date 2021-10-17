@@ -3,6 +3,7 @@
 	{{ parent() }}- Paramètres
 {% endblock %}
 {% block contenu %}
+<div class="container col-5 p-5">
 	<h1>Paramètres du compte</h1>
 	<br>
     <form action="index.php?page=parametres" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
@@ -17,7 +18,10 @@
             </label>
         </div>
         </br>
-        <button class="btn btn-primary" name="changes" type="submit">Sauvegarder les paramètres</button>
+        <div class="text-center">
+            <button class="btn btn-primary" name="changes" type="submit">Sauvegarder les paramètres</button>
+        </div>
     </form>
+</div>
 
 {% endblock %}
