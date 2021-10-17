@@ -19,7 +19,7 @@ class Employe{
         $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel , email, idRole,r.libelle, idCompte FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
         $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel, estInactif FROM Employe E, Role R, Compte C WHERE estInactif = 0 AND E.idCompte = C.id AND E.idRole = R.id ORDER BY E.idCompte");
         $this->mkUserListIna = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel, estInactif FROM Employe E, Role R, Compte C WHERE estInactif = 1 AND E.idCompte = C.id AND E.idRole = R.id ORDER BY E.idCompte");
-        $this->update  =  $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, region=:region, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
+        $this->update = $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, region=:region, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
     }
 
     public function insert($role,$idCompte, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal){ // Étape 3         
