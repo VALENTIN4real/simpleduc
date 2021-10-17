@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	{{ parent() }}- Paramètres
+{% endblock %}
+{% block contenu %}
+	<h1>Paramètres du compte</h1>
+	<br>
+    <form action="index.php?page=parametres" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
+        <div class="form-check">
+            {% if actuelCompte.isA2F == 1 %}
+                <input class="form-check-input" type="checkbox" name="a2fCheckBox" value="1" id="a2fCheckBox" checked>
+            {% else %}
+                <input class="form-check-input" type="checkbox" name="a2fCheckBox" value="1" id="a2fCheckBox">
+            {% endif %}
+            <label class="form-check-label" for="a2fCheckBox">
+                Activer la double authentification
+            </label>
+        </div>
+        </br>
+        <button class="btn btn-primary" name="changes" type="submit">Sauvegarder les paramètres</button>
+    </form>
+
+{% endblock %}
