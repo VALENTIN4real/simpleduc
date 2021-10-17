@@ -32,8 +32,6 @@ function accueilControleur($twig,$db){
         $inputNom = $_POST['inputNom'];
         $inputPrenom = $_POST['inputPrenom'];
         $inputEmail = $_POST['inputEmail'];
-        $inputPassword = $_POST['inputPassword'];
-        $inputConfPassword = $_POST['inputConfPassword'];
         $inputTel = $_POST['inputTel'];
         $selectRole = $_POST['selectRole'];
         $inputAdresse = $_POST['inputAdresse'];
@@ -41,27 +39,36 @@ function accueilControleur($twig,$db){
         $inputRegion = $_POST['inputRegion'];
         $inputCP = $_POST['inputCP'];
         $dateInscription = date('Y-m-d');
-        if($inputPassword == $inputConfPassword){
-            $execCompte = $compte->insert($inputEmail,password_hash($inputPassword, PASSWORD_DEFAULT));
-            if (!$execCompte){      
+        $passwordGenerated = uniqid();
+        $execCompte = $compte->insert($inputEmail,password_hash($passwordGenerated, PASSWORD_DEFAULT));
+        if (!$execCompte){      
+            $form['valide'] = false;            
+            $form['message'] = 'Problème d\'insertion dans la table';
+            exit;
+        }else{
+            $unCompte = $compte->getID($inputEmail);
+            $execEmploye = $employe->insert($selectRole,$unCompte['id'],$inputNom,$inputPrenom,$inputAdresse,$inputAdresseBis,$inputRegion,$inputTel,$inputCP,$dateInscription);
+            if (!$execEmploye){          
                 $form['valide'] = false;            
-                $form['message'] = 'Problème d\'insertion dans la table';
+                $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
                 exit;
-            }else{
-                $unCompte = $compte->getID($inputEmail);
-                $execEmploye = $employe->insert($selectRole,$unCompte['id'],$inputNom,$inputPrenom,$inputAdresse,$inputAdresseBis,$inputRegion,$inputTel,$inputCP,$dateInscription);
-                if (!$execEmploye){          
-                    $form['valide'] = false;            
-                    $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
-                    exit;
-                }
-                header("Location:index.php?page=accueil&item=1"); 
-            }     
-        }else {
-            $form['valide'] = false;
-            $form['message'] = 'UWU ';
+            }
+            $message = "
+                    <html>
+                    <head>
+                    </head>
+                    <body>
+                    Création de votre compte du service Simpléduc effectuée.\n
+                    Voici vos identifiants de connexion:\n
+                    Adresse mail : ".$inputEmail."\n
+                    Mot de passe : ".$passwordGenerated."
+                    </body>
+                    </html>";
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-type: text/html; charset=utf-8';
+            mail($inputEmail, 'Connexion à Simpleduc', $message, implode("\n", $headers));
             header("Location:index.php?page=accueil&item=1"); 
-        }
+        }     
     }
     $role = new Role($db);
     $employe = new Employe($db);
