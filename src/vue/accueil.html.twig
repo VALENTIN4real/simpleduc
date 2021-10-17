@@ -10,37 +10,37 @@
 	<br>
 	{% if session.login is defined %}
 		{% if session.role == "Ressources Humaines" %}
-		<div class="container">
-			<nav class="" aria-label="...">
-				<ul class="pagination pagination-lg">
-					{% if form.item == "1" %}
-						<li class="page-item active" aria-current="page">
-							<a class="page-link" href="?page=accueil&item=1">Page métier</a>
-						</li>
-					{% else %}
-						<li class="page-item" aria-current="page">
-							<a class="page-link" href="?page=accueil&item=1">Page métier</a>
-						</li>
-					{% endif %}
+			<div class="container">
+				<nav class="" aria-label="...">
+					<ul class="pagination pagination-lg">
+						{% if form.item == "1" %}
+							<li class="page-item active" aria-current="page">
+								<a class="page-link" href="?page=accueil&item=1">Page métier</a>
+							</li>
+						{% else %}
+							<li class="page-item" aria-current="page">
+								<a class="page-link" href="?page=accueil&item=1">Page métier</a>
+							</li>
+						{% endif %}
 
-					{% if form.item == "2" %}
-						<li class="page-item active">
-							<a class="page-link" href="?page=accueil&item=2">Archives</a>
-						</li>
-					{% else %}
+						{% if form.item == "2" %}
+							<li class="page-item active">
+								<a class="page-link" href="?page=accueil&item=2">Archives</a>
+							</li>
+						{% else %}
+							<li class="page-item">
+								<a class="page-link" href="?page=accueil&item=2">Archives</a>
+							</li>
+						{% endif %}
 						<li class="page-item">
-							<a class="page-link" href="?page=accueil&item=2">Archives</a>
+							<a class="page-link" href="https://la1ere.francetvinfo.fr/guadeloupe/le-vaccinobus-nouvel-outil-de-la-proximite-vaccinale-1095034.html">VACCIBUS</a>
 						</li>
-					{% endif %}
-					<li class="page-item">
-						<a class="page-link" href="https://la1ere.francetvinfo.fr/guadeloupe/le-vaccinobus-nouvel-outil-de-la-proximite-vaccinale-1095034.html">VACCIBUS</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+						<li class="page-item">
+							<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		{% endif %}
 	{% endif %}
 
@@ -149,6 +149,7 @@
 							<th scope="col">Num. Tél</th>
 							<th scope="col">État</th>
 							<th scope="col">Administrer</th>
+							<th scope="col">Activer/Désactiver</th>
 
 						</tr>
 					</thead>
@@ -172,29 +173,41 @@
 										</svg>
 									</a>
 								</td>
-								{% if employe.estInactif == 1%}
+								<td>
+									<a class="bi bi-brush-fill" href="?page=accueil&item=1&activate={{employe.id}}">
+										{% if employe.estInactif == 0 %}
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewbox="0 0 16 16">
+												<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+											</svg>
+										{% else %}
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle" viewbox="0 0 16 16">
+												<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+												<path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+											</svg>
+										{% endif %}
+									</a>
+								</td>
+								{% if employe.estInactif == 1 %}
 									<td scope="col">
-										<a class="page-link" href="?page=accueil&item=1&idDel={{employe.id}}">X</td>
-									{% endif %}
-								</tr>
-							{% endfor %}
-						</tbody>
+										<a class="page-link" href="?page=accueil&item=1&idDel={{employe.id}}">X</a>
+									</td>
+								{% endif %}
+							</tr>
+						{% endfor %}
 					</tbody>
-				</table>
-			</div>
+				</tbody>
+			</table>
 		</div>
+	</div>
 
 
-		{% else %}
+	{% else %}
 
-	{% endif %}
-
-
-{% elseif form.item == "2" %}
-	{% if session.role == "Ressources Humaines" %}
+{% endif %}{% elseif form.item == "2" %}
+{% if session.role == "Ressources Humaines" %}
 	<div class="container">
 
-	<h1 style="text-align:center">Archive des anciens employés</h1>
+		<h1 style="text-align:center">Archive des anciens employés</h1>
 		<table class="table">
 			<thead>
 				<tr style="text-align:center;">
@@ -224,6 +237,4 @@
 		</tbody>
 	</table>
 
-	</div>
-
-{% endif %}{% endif %}{% endblock %}
+</div>{% endif %}{% endif %}{% endblock %}
