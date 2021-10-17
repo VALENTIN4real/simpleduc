@@ -4,14 +4,15 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<title>
 			{% block title %}SIMPLEDUC -
 			{% endblock %}
 		</title>
 	</head>
 
-	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<body class="bg-secondary">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="?page=accueil">SIMPLEDUC</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +28,7 @@
 				</div>
 				{% if session.login is defined %}
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-primary bg-gradient dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Menu
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,7 +37,7 @@
 						</div>
 					</div>
 					<div>
-						<a class="btn btn-danger" href="?page=deconnexion">Se deconnecter</a>
+						<a class="btn btn-danger bg-gradient" href="?page=deconnexion">Se deconnecter</a>
 					</div>
 
 				{% else %}
