@@ -9,7 +9,10 @@ function getPage($db){
     $lesPages['liste-utilisateurs'] = "listeUtilisateurControleur";
     $lesPages['deconnexion'] = "deconnexionControleur";
     $lesPages['modif-utilisateur'] = "modifUtilisateurControleur";
-    
+    $lesPages['firstConnexion'] = "firstConnexionControleur";
+    $lesPages['parametres'] = "parametresControleur";
+    $lesPages['a2f'] = "a2fControleur";
+
     if($db!=null){
         if (isset($_GET['page'])){
             $page = $_GET['page'];
