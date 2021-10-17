@@ -24,6 +24,18 @@ function accueilControleur($twig,$db){
         header("Location:?page=accueil&item=1");  
                     
     }
+
+    if(isset($_GET['activate'])){
+        $id = $_GET['activate'];
+        $employe = new Employe($db);
+        $actuelEmploye = $employe->selectByID($id);
+        if($actuelEmploye['estInactif'] == 0){
+            $employe->updateEstInactif(1,$id);
+        }else{
+            $employe->updateEstInactif(0,$id);
+        } 
+        header("Location:?page=accueil&item=1");         
+    }
     
     if (isset($_POST['inscription'])){
         $form['valide'] = true; 
