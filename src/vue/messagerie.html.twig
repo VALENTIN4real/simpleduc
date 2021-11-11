@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	{{ parent() }}- Boîte de réception
+{% endblock %}
+{% block contenu %}
+	<style>
+		#rcorners3 {
+			position: relative;
+			border-radius: 15px 50px;
+			background: #50FAAA;
+			padding: 20px;
+			width: fill;
+			height: 150px;
+		}
+
+		.center {
+			margin: auto;
+			width: 50%;
+			padding: 10px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.container {
+			border: solid 3px grey;
+			border-radius: 12px;
+		}
+
+		.bottom {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		.button {
+			background-color: #04AA6D;
+			border: none;
+			color: white;
+			padding: 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+		}
+		.button4 {
+			border-radius: 12px;
+		}
+	}
+	</style>
+	<h1 style="text-align:center;">Boîte de réception</h1>
+	<br>
+
+	<div class="center container">
+		{% for message in listeMessage %}
+
+			<div id="rcorners3">
+				<div class="center">De:
+					{{message.expediteur}}</div>
+				<div class="center">Objet:
+					{{message.objet}}</div>
+				<div class="bottom">Reçu le: 10/10/21</div>
+			</div>
+			<br>
+		{% endfor %}
+	</div>
+	<div class="center">
+		<button id="newMessageButton" class="button button4">Nouveau message</button>
+	</div>
+
+	<div class="modal fade" id="myModal" role="dialog">
+		<div
+			class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-default perform" data-dismiss="modal">Oui</button>
+					<button type="button" class="btn btn-default close" data-dismiss="modal">Non</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

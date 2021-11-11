@@ -174,9 +174,9 @@
 									</a>
 									<div></div>
 									{% if employe.estInactif == 1 %}
-										<a href="?page=accueil&item=1&idDel={{employe.id}}">
-											<span class="material-icons">delete</span>
-										</a>
+										<button id="delbutton" value="{{employe.id}}">
+											<span class="material-icons deleteButton">delete</span>
+										</button>
 									{% endif %}
 								</td>
 								<td>
@@ -200,13 +200,32 @@
 			</table>
 		</div>
 	</div>
+	<div class="modal fade" id="myModal" role="dialog">
+		<div
+			class="modal-dialog">
 
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-default perform" data-dismiss="modal">Oui</button>
+					<button type="button" class="btn btn-default close" data-dismiss="modal">Non</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 	{% else %}
 
 {% endif %}{% elseif form.item == "2" %}
 {% if session.role == "Ressources Humaines" %}
-	<div class="container">
+	<div class="container bg-light">
 		<h1 style="text-align:center">Archive des anciens employés</h1>
 		<table class="table">
 			<thead>
@@ -219,6 +238,7 @@
 					<th scope="col">Région</th>
 					<th scope="col">Num. Tél</th>
 					<th scope="col">Code Postal</th>
+					<th scope="col">Date d'arrêt</th>
 
 				</tr>
 			</thead>
@@ -233,9 +253,11 @@
 						<td>{{employeArchive.region}}</td>
 						<td>{{employeArchive.numTel}}</td>
 						<td>{{employeArchive.codePostal}}</td>
+						<td>{{employeArchive.dateArret | date("d-m-Y")}}</td>
 					{% endfor %}
 				</tbody>
 			</tbody>
 		</table>
 	</div>
+
 {% endif %}{% endif %}{% endblock %}

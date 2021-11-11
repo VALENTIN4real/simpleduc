@@ -12,6 +12,7 @@ function getPage($db){
     $lesPages['firstConnexion'] = "firstConnexionControleur";
     $lesPages['parametres'] = "parametresControleur";
     $lesPages['a2f'] = "a2fControleur";
+    $lesPages['messagerie'] = "messagerieControleur";
 
     if($db!=null){
         if (isset($_GET['page'])){
