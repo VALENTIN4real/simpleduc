@@ -13,6 +13,7 @@ function getPage($db){
     $lesPages['parametres'] = "parametresControleur";
     $lesPages['a2f'] = "a2fControleur";
     $lesPages['messagerie'] = "messagerieControleur";
+    $lesPages['fiche-de-paie'] = "ficheControleur";
 
     if($db!=null){
         if (isset($_GET['page'])){

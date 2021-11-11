@@ -1,0 +1,28 @@
+body {
+    width: 75%;
+    border: 1px solid black;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#intro {
+    width: 40%;
+    border: 3px solid black;
+}
+
+#infoBulletin {
+    border: 1px solid black;
+}
+
+#infoEmploye {
+    border: 1px solid black;
+}
+
+#infoEntreprise {
+    width: 20%;
+    height: 50%;
+    border: 3px solid black;
+}
