@@ -1,0 +1,41 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+
+p {
+    line-height: 1%;
+}
+
+#intro {
+    width: 50%;
+    border: 3px solid black;
+}
+
+#infoBulletin {
+    border: 1px solid black;
+}
+
+#infoEmploye {
+    border: 1px solid black;
+}
+
+#infoEntreprise {
+    width: 30%;
+    height: 50%;
+    border: 3px solid black;
+}
+
+#contentTable {
+    padding-top: 1em;
+    width: 100%;
+}
+
+th {
+    border: 1px solid black;
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+}
