@@ -4,6 +4,7 @@ class Employe{
     private $insert; 
     private $connect;
     private $select;
+    private $selectDestinataire;
     private $selectByAccount;
     private $selectByID;
     private $update;
@@ -17,7 +18,8 @@ class Employe{
         $this->db = $db;    
         $this->insert = $this->db->prepare("insert  into  Employe(nom,  prenom,  idRole,idCompte,adresse,adresseBis,region,numTel,codePostal,dateInscription)values (:nom, :prenom, :role,:idCompte,:adresse,:adresseBis,:region,:numTel,:codePostal,:dateInscription)");
         $this->connect = $this->db->prepare("select   E.id, C.email,   E.idRole, libelle, C.mdp, estInactif from Employe E, Compte C, Role R WHERE R.id = E.idRole AND E.idCompte = C.id and C.email=:email");
-        $this->select = $db->prepare("select E.id, email, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id order by email");
+        $this->select = $db->prepare("select E.id, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id");
+        $this->selectDestinataire = $db->prepare("select E.id, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id and nom != :nom");
         $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel, estInactif , email, idRole,r.libelle, idCompte, dateInscription FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id AND C.id = E.idCompte;");
         $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel ,estInactif, email, idRole, r.libelle, idCompte,dateInscription FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
         $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel, estInactif,dateInscription FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id ORDER BY estInactif,E.nom");
@@ -62,6 +64,14 @@ class Employe{
             print_r($this->select->errorInfo());          
         }        
         return $this->select->fetchAll();    
+    }
+
+    public function selectDestinataire($nom){        
+        $this->selectDestinataire->execute(array(':nom'=>$nom));        
+        if ($this->selectDestinataire->errorCode()!=0){             
+            print_r($this->selectDestinataire->errorInfo());          
+        }        
+        return $this->selectDestinataire->fetchAll();    
     }
 
     public function selectByAccount($email){        

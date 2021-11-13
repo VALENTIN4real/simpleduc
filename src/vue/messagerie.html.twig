@@ -72,19 +72,37 @@
 			class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<form action="index.php?page=messagerie" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">Envoi de message</h5>
+					</div>
+					<div class="modal-body">
+						<div>
+							<label>Destinataire :</label>
+							<select id="listeDestinataire" name="destinataireInput">
+								{% for destinataire in listeDestinataire %}
+									<option value="{{destinataire.nom}}">{{destinataire.nom}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</br>
+					<div>
+						<label>Objet:</label>
+						<input type="text" id="objenInput" name="objetInput"></input>
 				</div>
-				<div class="modal-body">
-					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
-				</div>
-				<div class="modal-footer">
-				<button type="button" class="btn btn-default perform" data-dismiss="modal">Oui</button>
-					<button type="button" class="btn btn-default close" data-dismiss="modal">Non</button>
+				<br>
+				<div>
+					<label>Message:</label>
+					<textarea name="contenuInput"></textarea>
 				</div>
 			</div>
-
-		</div>
+			<div class="modal-footer">
+				<button type="submit" name="envoi" class="btn btn-default perform" data-dismiss="modal">Envoyer</button>
+				<button type="button" class="btn btn-default close" data-dismiss="modal">Annuler</button>
+			</div>
+		</form>
 	</div>
-{% endblock %}
+
+</div></div>{% endblock %}

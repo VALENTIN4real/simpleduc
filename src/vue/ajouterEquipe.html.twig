@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	Ajouter une équipe
+{% endblock %}
+
+{% block contenu %}
+	<div class="container">
+		<div class="row">
+			<div class="col-0 bg-light rounded">
+				<h1 style="text-align:center;">Créer un groupe</h1>
+				<form action="index.php?page=ajout-equipe" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
+					<div class="form-group">
+						<label for="inputPrenom">Nom du groupe</label>
+						<input type="text" class="form-control" id="inputNom" name="inputNom" placeholder="Nom du groupe" required>
+						<div class="valid-feedback">
+							Semble correct!
+						</div>
+					</div>
+                    <div class="form-group">
+						<label for="inputPrenom">Ajouter un développeur au projet</label>
+						<button type="button" class="btn-primary" id="buttonAdd">+</button>
+					</div>
+
+                    <div class="form-group">
+                        <ul id="listDev">
+                        </ul>
+					</div>
+					
+					<div class="text-center">
+						<button class="btn btn-primary bg-gradient" name="createGroupe" type="submit">Créer</button>
+					</div>
+				</br>
+			</div>
+		</form>
+	</div>
+    <select id="selectModel" hidden>
+    {% for dev in listeDev %}
+    <option value="{{dev.idEmploye}}">{{dev.nom}} {{dev.prenom}}</option>
+    {% endfor %}
+    </select>
+
+{% endblock %}

@@ -8,4 +8,5 @@
     require_once 'parametresControleur.php';
     require_once 'a2fControleur.php';
     require_once 'messagerieControleur.php';
+    require_once 'ajouterEquipeControleur.php';
 ?>

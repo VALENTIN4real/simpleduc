@@ -9,20 +9,20 @@
 
 	<br>
 	{% if session.login is defined %}
-		{% if session.role == "Ressources Humaines" %}
-			<div class="container">
-				<nav class="" aria-label="...">
-					<ul class="pagination pagination-lg">
-						{% if form.item == "1" %}
-							<li class="page-item active" aria-current="page">
-								<a class="page-link" href="?page=accueil&item=1">Page métier</a>
-							</li>
-						{% else %}
-							<li class="page-item" aria-current="page">
-								<a class="page-link" href="?page=accueil&item=1">Page métier</a>
-							</li>
-						{% endif %}
+		<div class="container">
+			<nav class="" aria-label="...">
+				<ul class="pagination pagination-lg">
+					{% if form.item == "1" %}
+						<li class="page-item active" aria-current="page">
+							<a class="page-link" href="?page=accueil&item=1">Page métier</a>
+						</li>
+					{% else %}
+						<li class="page-item" aria-current="page">
+							<a class="page-link" href="?page=accueil&item=1">Page métier</a>
+						</li>
+					{% endif %}
 
+					{% if session.role == "Ressources Humaines" %}
 						{% if form.item == "2" %}
 							<li class="page-item active">
 								<a class="page-link" href="?page=accueil&item=2">Archives</a>
@@ -38,10 +38,25 @@
 						<li class="page-item">
 							<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
 						</li>
-					</ul>
-				</nav>
-			</div>
-		{% endif %}
+
+					{% elseif session.role == "Développeur"%}
+
+					{% elseif session.role == "Chef de projet"%}
+
+						{% if form.item == "2" %}
+							<li class="page-item active" aria-current="page">
+								<a class="page-link" href="?page=accueil&item=2">Equipe</a>
+							</li>
+						{% else %}
+							<li class="page-item" aria-current="page">
+								<a class="page-link" href="?page=accueil&item=2">Equipe</a>
+							</li>
+						{% endif %}
+
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
 	{% endif %}
 
 
@@ -213,7 +228,7 @@
 					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
 				</div>
 				<div class="modal-footer">
-				<button type="button" class="btn btn-default perform" data-dismiss="modal">Oui</button>
+					<button id="perform" type="button" class="btn btn-default" data-dismiss="modal">Oui</button>
 					<button type="button" class="btn btn-default close" data-dismiss="modal">Non</button>
 				</div>
 			</div>
@@ -221,7 +236,22 @@
 		</div>
 	</div>
 
-	{% else %}
+{% elseif session.role == "Développeur" %}
+	<h1 class="text-center">Tableau des missions</h1>
+	<div class="card text-center">
+		<div class="card-header">
+			Featured
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">Special title treatment</h5>
+			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+			<a href="#!" class="btn btn-primary">Go somewhere</a>
+		</div>
+		<div class="card-footer text-muted">
+			2 days ago
+		</div>
+	</div>
+	{% elseif session.role == "Chef de projet" %}
 
 {% endif %}{% elseif form.item == "2" %}
 {% if session.role == "Ressources Humaines" %}
@@ -259,5 +289,29 @@
 			</tbody>
 		</table>
 	</div>
-
+{% elseif session.role == "Chef de projet"%}
+	<h1 class="text-center">Tableau des équipes</h1>
+	{% if listeEquipe|length == 0 %}
+		<h2 class="text-center">Pas d'équipe inscrite</h2>
+	{% else %}
+		<table class="table">
+			<thead>
+				<tr style="text-align:center;">
+					<th scope="col">ID</th>
+					<th scope="col">NomEquipe</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for equipe in listeEquipe %}
+					<tr style="text-align:center;">
+						<td>{{equipe.id}}</td>
+						<td>{{equipe.nomEquipe}}</td>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+	{% endif %}
+	<a class="btn btn-primary" href="?page=ajout-equipe">Créer équipe</a>
+	
+	
 {% endif %}{% endif %}{% endblock %}

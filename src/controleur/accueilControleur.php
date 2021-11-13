@@ -1,7 +1,10 @@
 <?php
 function accueilControleur($twig,$db){
     $form = array();
-
+    $listeEmploye = array();
+    $listeRole = array();
+    $listeEmployeArchives = array();
+    $listeEquipe = array();
     if($_SESSION['login'] == null){
         header("Location:?page=connexion");     
     }
@@ -51,7 +54,7 @@ function accueilControleur($twig,$db){
         $inputRegion = $_POST['inputRegion'];
         $inputCP = $_POST['inputCP'];
         $dateInscription = date('Y-m-d');
-        $passwordGenerated = uniqid();
+        $passwordGenerated = "123";
         $execCompte = $compte->insert($inputEmail,password_hash($passwordGenerated, PASSWORD_DEFAULT));
         if (!$execCompte){      
             $form['valide'] = false;            
@@ -64,6 +67,12 @@ function accueilControleur($twig,$db){
                 $form['valide'] = false;            
                 $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
                 exit;
+            }
+            var_dump($selectRole);
+            if($selectRole == 1){
+                $employeCree = $employe->selectByAccount($inputEmail);
+                $dev = new Dev($db);
+                $dev->insert($employeCree['id']);
             }
             $message = "
                     <html>
@@ -82,13 +91,21 @@ function accueilControleur($twig,$db){
             header("Location:index.php?page=accueil&item=1"); 
         }     
     }
-    $role = new Role($db);
-    $employe = new Employe($db);
-    $archive = new Archivage($db);
-    $listeEmploye = $employe->mkUserList();
-    $listeRole = $role->select();
-    $listeEmployeArchives = $archive->selectEmploye();
+    
+    if($_SESSION['role'] == "Ressources Humaines"){
+        $role = new Role($db);
+        $employe = new Employe($db);
+        $archive = new Archivage($db);
+        $listeEmploye = $employe->mkUserList();
+        $listeRole = $role->select();
+        $listeEmployeArchives = $archive->selectEmploye();
+    }else if($_SESSION['role'] == "Chef de projet"){
+        $equipe = new Equipe($db);
+        $listeEquipe = $equipe->getAllEquipes();
+    }
 
-    echo $twig->render('accueil.html.twig', array('form' => $form, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,'listeEmployeArchives'=>$listeEmployeArchives));
+   
+
+    echo $twig->render('accueil.html.twig', array('form' => $form, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,'listeEmployeArchives'=>$listeEmployeArchives,'listeEquipe'=>$listeEquipe));
 }
 ?>
