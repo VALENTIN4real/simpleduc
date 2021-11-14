@@ -1,6 +1,7 @@
 <?php
 function accueilControleur($twig,$db){
     $form = array();
+    $liste = array();
     $listeEmploye = array();
     $listeRole = array();
     $listeEmployeArchives = array();
@@ -51,7 +52,7 @@ function accueilControleur($twig,$db){
         $selectRole = $_POST['selectRole'];
         $inputAdresse = $_POST['inputAdresse'];
         $inputAdresseBis = $_POST['inputAdresseBis'];
-        $inputRegion = $_POST['inputRegion'];
+        $inputVille = $_POST['inputVille'];
         $inputCP = $_POST['inputCP'];
         $dateInscription = date('Y-m-d');
         $passwordGenerated = "123";
@@ -62,7 +63,7 @@ function accueilControleur($twig,$db){
             exit;
         }else{
             $unCompte = $compte->getID($inputEmail);
-            $execEmploye = $employe->insert($selectRole,$unCompte['id'],$inputNom,$inputPrenom,$inputAdresse,$inputAdresseBis,$inputRegion,$inputTel,$inputCP,$dateInscription);
+            $execEmploye = $employe->insert($selectRole,$unCompte['id'],$inputNom,$inputPrenom,$inputAdresse,$inputAdresseBis,$inputVille,$inputTel,$inputCP,$dateInscription);
             if (!$execEmploye){          
                 $form['valide'] = false;            
                 $form['message'] = 'Problème d\'insertion dans la table utilisateur ';
@@ -99,13 +100,42 @@ function accueilControleur($twig,$db){
         $listeEmploye = $employe->mkUserList();
         $listeRole = $role->select();
         $listeEmployeArchives = $archive->selectEmploye();
+
+        $limite=5;
+        if(!isset($_GET['nopage'])){
+            $inf=0;
+            $nopage=0;
+        }
+        else{
+            $nopage=$_GET['nopage'];
+            $inf = $nopage * $limite;
+        }
+
+        $r = $archive->selectCount();
+        $nb = $r['nb']; 
+        $liste = $archive->selectLimit($inf,$limite);
+        $form['nbpages'] = ceil($nb/$limite);
+        $form['nopage'] = $nopage;
+
+
     }else if($_SESSION['role'] == "Chef de projet"){
         $equipe = new Equipe($db);
-        $listeEquipe = $equipe->getAllEquipes();
+        $limite=5;
+        if(!isset($_GET['nopage'])){
+            $inf=0;
+            $nopage=0;
+        }
+        else{
+            $nopage=$_GET['nopage'];
+            $inf = $nopage * $limite;
+        }
+
+        $r = $equipe->selectCount();
+        $nb = $r['nb']; ;
+        $liste = $equipe->selectLimit($inf,$limite);
+        $form['nbpages'] = ceil($nb/$limite);
+        $form['nopage'] = $nopage;
     }
-
-   
-
-    echo $twig->render('accueil.html.twig', array('form' => $form, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,'listeEmployeArchives'=>$listeEmployeArchives,'listeEquipe'=>$listeEquipe));
+    echo $twig->render('accueil.html.twig', array('form' => $form,'liste'=>$liste, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,'listeEmployeArchives'=>$listeEmployeArchives,'listeEquipe'=>$listeEquipe));
 }
 ?>

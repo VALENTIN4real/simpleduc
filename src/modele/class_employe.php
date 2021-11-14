@@ -16,23 +16,23 @@ class Employe{
 
     public function __construct($db){        
         $this->db = $db;    
-        $this->insert = $this->db->prepare("insert  into  Employe(nom,  prenom,  idRole,idCompte,adresse,adresseBis,region,numTel,codePostal,dateInscription)values (:nom, :prenom, :role,:idCompte,:adresse,:adresseBis,:region,:numTel,:codePostal,:dateInscription)");
+        $this->insert = $this->db->prepare("insert  into  Employe(nom,  prenom,  idRole,idCompte,adresse,adresseBis,ville,numTel,codePostal,dateInscription)values (:nom, :prenom, :role,:idCompte,:adresse,:adresseBis,:ville,:numTel,:codePostal,:dateInscription)");
         $this->connect = $this->db->prepare("select   E.id, C.email,   E.idRole, libelle, C.mdp, estInactif from Employe E, Compte C, Role R WHERE R.id = E.idRole AND E.idCompte = C.id and C.email=:email");
         $this->select = $db->prepare("select E.id, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id");
         $this->selectDestinataire = $db->prepare("select E.id, nom, prenom, idRole, libelle,dateInscription  from Employe E, Role R where E.idRole = R.id and nom != :nom");
-        $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel, estInactif , email, idRole,r.libelle, idCompte, dateInscription FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id AND C.id = E.idCompte;");
-        $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, region,codePostal, numTel ,estInactif, email, idRole, r.libelle, idCompte,dateInscription FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
+        $this->selectByAccount = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, ville,codePostal, numTel, estInactif , email, idRole,r.libelle, idCompte, dateInscription FROM Employe E, Compte C, Role r WHERE C.email = :email AND idRole = r.id AND C.id = E.idCompte;");
+        $this->selectByID = $this->db->prepare("SELECT E.id, nom, prenom, adresse, adresseBis, ville,codePostal, numTel ,estInactif, email, idRole, r.libelle, idCompte,dateInscription FROM Employe E, Compte C, Role r WHERE E.id = :id AND idRole = r.id AND idCompte = C.id");
         $this->mkUserList = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel, estInactif,dateInscription FROM Employe E, Role R, Compte C WHERE E.idCompte = C.id AND E.idRole = R.id ORDER BY estInactif,E.nom");
         $this->mkUserListIna = $this->db->prepare("SELECT E.id, email, nom, prenom, libelle, numTel, estInactif,dateInscription FROM Employe E, Role R, Compte C WHERE estInactif = 1 AND E.idCompte = C.id AND E.idRole = R.id ORDER BY E.idCompte");
-        $this->update  =  $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, region=:region, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
+        $this->update  =  $db->prepare("UPDATE Employe, Compte set  nom=:nom,  prenom=:prenom,  idRole=:role, adresse=:adresse, adresseBis=:adresseBis, ville=:ville, numTel=:numTel, codePostal=:codePostal, email=:email where Compte.id = idCompte AND Employe.id=:id");
         $this->delete = $db->prepare("DELETE FROM Employe WHERE id=:id");
         $this->getIDAccount = $this->db->prepare("SELECT idCompte FROM Employe WHERE id=:id");
         $this->updateEstInactif = $db->prepare("UPDATE Employe SET estInactif=:estInactif WHERE id=:id");
     }
 
-    public function insert($role,$idCompte, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal,$dateInscription){ // Étape 3         
+    public function insert($role,$idCompte, $nom, $prenom,$adresse,$adresseBis,$ville,$numTel,$codePostal,$dateInscription){ // Étape 3         
         $r = true;        
-        $this->insert->execute(array(':role'=>$role,':idCompte'=>$idCompte, ':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':region'=>$region,':numTel'=>$numTel,':codePostal'=>$codePostal,'dateInscription'=>$dateInscription));        
+        $this->insert->execute(array(':role'=>$role,':idCompte'=>$idCompte, ':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':ville'=>$ville,':numTel'=>$numTel,':codePostal'=>$codePostal,'dateInscription'=>$dateInscription));        
         if ($this->insert->errorCode()!=0){
             print_r($this->insert->errorInfo());               
             $r=false;        
@@ -40,9 +40,9 @@ class Employe{
         return $r; 
     }
 
-    public function update($role, $nom, $prenom,$adresse,$adresseBis,$region,$numTel,$codePostal,$email,$id){ // Étape 3         
+    public function update($role, $nom, $prenom,$adresse,$adresseBis,$ville,$numTel,$codePostal,$email,$id){ // Étape 3         
         $r = true;        
-        $this->update->execute(array(':role'=>$role,':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':region'=>$region,':numTel'=>$numTel,':codePostal'=>$codePostal,':email'=>$email,':id'=>$id));        
+        $this->update->execute(array(':role'=>$role,':nom'=>$nom,':prenom'=>$prenom,':adresse'=>$adresse,':adresseBis'=>$adresseBis,':ville'=>$ville,':numTel'=>$numTel,':codePostal'=>$codePostal,':email'=>$email,':id'=>$id));        
         if ($this->update->errorCode()!=0){
             print_r($this->update->errorInfo());               
             $r=false;        

@@ -77,7 +77,7 @@
 				<div class="row">
 					<div class="col-4 bg-light rounded">
 						<h1 style="text-align:center;">Créer un compte</h1>
-						<form action="index.php?page=accueil" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation" novalidate>
+						<form action="index.php?page=accueil" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation">
 							<div class="form-group">
 								<label for="inputPrenom">Prénom</label>
 								<input type="text" class="form-control" id="inputPrenom" name="inputPrenom" placeholder="Prénom" required>
@@ -126,20 +126,16 @@
 									<div class="invalid-feedback">
 										Veuillez saisir une ville.
 									</div>
-
-									<div class="form-group">
-										<label for="validationCustom03">Région</label>
-										<input type="text" class="form-control" id="validationCustom03" name="inputRegion" placeholder="Région" required>
-										<div class="invalid-feedback">
-											Veuillez saisir une région.
-										</div>
-									</div>
 									<div class="form-group">
 										<label for="validationCustom05">Code postal</label>
-										<input type="text" class="form-control" id="validationCustom05" name="inputCP" placeholder="Zip" required>
+										<input type="text" class="form-control" id="codePostal" name="inputCP" placeholder="Zip" required>
 										<div class="invalid-feedback">
 											Veuillez saisir un code postal valide.
 										</div>
+									</div>
+									<div class="form-group">
+										<label for="validationCustom03">Ville</label>
+										<select class="form-control" id="region" name="inputVille" required></select>
 									</div>
 								</div>
 							</br>
@@ -257,6 +253,9 @@
 {% if session.role == "Ressources Humaines" %}
 	<div class="container bg-light">
 		<h1 style="text-align:center">Archive des anciens employés</h1>
+		{% if liste|length == 0 %}
+		<h2 class="text-center">Archive vide</h2>
+		{% else %}
 		<table class="table">
 			<thead>
 				<tr style="text-align:center;">
@@ -273,7 +272,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for employeArchive in listeEmployeArchives %}
+				{% for employeArchive in liste %}
 					<tr style="text-align:center;">
 						<td>{{employeArchive.id}}</td>
 						<td>{{employeArchive.nom}}</td>
@@ -288,10 +287,34 @@
 				</tbody>
 			</tbody>
 		</table>
+		{% set nb = form.nbpages %}
+		<nav aria-label="Page navigation">
+			<ul class="pagination justify-content-center m-4 p-4">
+				<li class="page-item {% if form.nopage == 0  %}disabled{% endif %}">
+					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ 0 }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				{% for i in 1..nb %}
+
+					<li class="page-item {% if i == form.nopage +1  %} active{% endif %}">
+						<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ i-1 }}">{{ i }}
+						</a>
+					</li>
+
+				{% endfor %}
+				<li class="page-item {% if form.nopage == form.nbpages-1  %}disabled{% endif %}">
+					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ nb-1 }}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		{% endif %}
 	</div>
 {% elseif session.role == "Chef de projet"%}
 	<h1 class="text-center">Tableau des équipes</h1>
-	{% if listeEquipe|length == 0 %}
+	{% if liste|length == 0 %}
 		<h2 class="text-center">Pas d'équipe inscrite</h2>
 	{% else %}
 		<table class="table">
@@ -302,7 +325,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for equipe in listeEquipe %}
+				{% for equipe in liste %}
 					<tr style="text-align:center;">
 						<td>{{equipe.id}}</td>
 						<td>{{equipe.nomEquipe}}</td>
@@ -310,8 +333,31 @@
 				</tbody>
 			</tbody>
 		</table>
+		{% set nb = form.nbpages %}
+		<nav aria-label="Page navigation">
+			<ul class="pagination justify-content-center m-4 p-4">
+				<li class="page-item {% if form.nopage == 0  %}disabled{% endif %}">
+					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ 0 }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				{% for i in 1..nb %}
+
+					<li class="page-item {% if i == form.nopage +1  %} active{% endif %}">
+						<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ i-1 }}">{{ i }}
+						</a>
+					</li>
+
+				{% endfor %}
+				<li class="page-item {% if form.nopage == form.nbpages-1  %}disabled{% endif %}">
+					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ nb-1 }}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
 	{% endif %}
 	<a class="btn btn-primary" href="?page=ajout-equipe">Créer équipe</a>
-	
-	
+
+
 {% endif %}{% endif %}{% endblock %}

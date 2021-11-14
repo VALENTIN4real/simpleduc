@@ -6,6 +6,27 @@ $(document).ready(function () {
     $(".close").click(function () {
         $("#myModal").modal('hide');
     })
+    const apiUrl = 'https://geo.api.gouv.fr/communes?codePostal=';
+    const format =  '&format=json';
+
+    let zipcode = $('#codePostal');
+    let city = $('#region');
+    $('#codePostal').on('blur',function(){
+        $(city).empty();
+        let code = $(this).val();
+        let url = apiUrl+code+format;
+        fetch(url,{method: 'get'}).then(response => response.json()).then(results => {
+            //console.log(results);
+            if(results.length > 1){
+                $.each(results,function(key,value){
+                $(city).append('<option value="'+value.nom+'">'+value.nom+'</option>');
+                });
+            }
+        }).catch(err =>{
+            console.log(err);
+        });
+    });
+
 
 });
 
@@ -28,7 +49,6 @@ function modalMessagerie() {
 
 function addDevToEquipe() {
     $("#buttonAdd").click(function () {
-        
         var line = document.createElement("li");    
         var selector = document.createElement("select");
         selector.setAttribute('class', 'selectors');
@@ -39,7 +59,6 @@ function addDevToEquipe() {
                 option = document.createElement("option");
                 option.innerText = $("#selectModel").children()[index].innerText;
                 option.value = $("#selectModel").children()[index].value;
-                console.log(option.value);
                 selector.append(option);
             }
         })
@@ -71,3 +90,4 @@ function isValueExisting(array, value) {
     })
     return verif;
 }
+

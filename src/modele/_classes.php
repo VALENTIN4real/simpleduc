@@ -6,3 +6,4 @@
      require_once 'class_message.php';
      require_once 'class_dev.php';
      require_once 'class_equipe.php';
+     require_once 'class_associerEquipe.php';
