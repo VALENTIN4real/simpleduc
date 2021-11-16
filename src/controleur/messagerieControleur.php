@@ -8,16 +8,16 @@ function messagerieControleur($twig,$db){
         $message = new Message($db);
         $employe = new Employe($db);
         $employeActuel = $employe->selectByAccount($_SESSION['login']);
-        $exec = $message->send($employeActuel['nom'],$inputDestinataire,$inputObjet,$inputContenu);
+        $exec = $message->send($employeActuel['nom'],$inputDestinataire,$inputObjet,$inputContenu,date("Y-m-d"));
         if(!$exec){
             $form['message'] = 'Uwu';
         }
     }
     $listeMessage = array();
-    $employe = new Employe($db);
+    $employe = new Employe($db); 
     $message = new Message($db);
     $employeActuel = $employe->selectByAccount($_SESSION['login']);
-    $listeMessage = $message->getMessages($employeActuel['nom']);
+    $listeMessage = $message->getMessages($employeActuel['email']);
     $listeDestinataire = $employe->selectDestinataire($employeActuel['nom']);
     echo $twig->render('messagerie.html.twig', array('listeMessage'=>$listeMessage,'listeDestinataire'=>$listeDestinataire));
 
