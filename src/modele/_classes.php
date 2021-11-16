@@ -8,3 +8,4 @@
      require_once 'class_equipe.php';
      require_once 'class_associerEquipe.php';
      require_once 'class_leaderboard.php';
+     require_once 'class_projet.php';

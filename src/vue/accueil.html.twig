@@ -247,69 +247,125 @@
 			2 days ago
 		</div>
 	</div>
-	{% elseif session.role == "Chef de projet" %}
+{% elseif session.role == "Chef de projet" %}
+
+	<h1 class="text-center">Tableau de bord</h1>
+	<h3 class="text-center">Projet en attente de traitement</h3>
+	{% if listeProjet|length > 0 %}
+		{% for projet in listeProjet %}
+			{% if projet.idGroupe is null %}
+				<div class="card text-center">
+					<div class="card-header">
+						Projet {{projet.designation}}
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">Pas de groupe attitré</h5>
+						<p class="card-text">{{projet.nomEquipe}}</p>
+						<a href="#!" class="btn btn-primary">Attribuer un groupe</a>
+					</div>
+					<div class="card-footer text-muted">
+						{% if projet.date != null %}
+							{{projet.date}}
+						{% else %}
+							Pas encore débuté
+						{% endif %}
+					</div>
+				</div>
+				<br>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<h2 style="text-align:center;">Pas de mission</h2>
+	{% endif %}
+
+	<h3 class="text-center">Projet en cours</h3>
+	{% if listeProjet|length > 0 %}
+		{% for projet in listeProjetsEnCours %}
+			<div class="card text-center">
+				<div class="card-header">
+					Projet {{projet.designation}}
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Groupe attitré</h5>
+					<p class="card-text">{{projet.nomEquipe}}</p>
+					<a href="#!" class="btn btn-primary">Voir le projet</a>
+				</div>
+				<div class="card-footer text-muted">
+					{% if projet.date != null %}
+						{{projet.date}}
+					{% else %}
+						Pas encore débuté
+					{% endif %}
+				</div>
+			</div>
+			<br>
+		{% endfor %}
+	{% else %}
+		<h2 style="text-align:center;">Pas de mission</h2>
+	{% endif %}
+
 
 {% endif %}{% elseif form.item == "2" %}
 {% if session.role == "Ressources Humaines" %}
 	<div class="container bg-light">
 		<h1 style="text-align:center">Archive des anciens employés</h1>
 		{% if liste|length == 0 %}
-		<h2 class="text-center">Archive vide</h2>
+			<h2 class="text-center">Archive vide</h2>
 		{% else %}
-		<table class="table">
-			<thead>
-				<tr style="text-align:center;">
-					<th scope="col">ID</th>
-					<th scope="col">Nom</th>
-					<th scope="col">Prénom</th>
-					<th scope="col">Adresse</th>
-					<th scope="col">Adresse complémentaire</th>
-					<th scope="col">Région</th>
-					<th scope="col">Num. Tél</th>
-					<th scope="col">Code Postal</th>
-					<th scope="col">Date d'arrêt</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				{% for employeArchive in liste %}
+			<table class="table">
+				<thead>
 					<tr style="text-align:center;">
-						<td>{{employeArchive.id}}</td>
-						<td>{{employeArchive.nom}}</td>
-						<td>{{employeArchive.prenom}}</td>
-						<td>{{employeArchive.adresse}}</td>
-						<td>{{employeArchive.adresseBis}}</td>
-						<td>{{employeArchive.region}}</td>
-						<td>{{employeArchive.numTel}}</td>
-						<td>{{employeArchive.codePostal}}</td>
-						<td>{{employeArchive.dateArret | date("d-m-Y")}}</td>
-					{% endfor %}
-				</tbody>
-			</tbody>
-		</table>
-		{% set nb = form.nbpages %}
-		<nav aria-label="Page navigation">
-			<ul class="pagination justify-content-center m-4 p-4">
-				<li class="page-item {% if form.nopage == 0  %}disabled{% endif %}">
-					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ 0 }}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				{% for i in 1..nb %}
+						<th scope="col">ID</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Adresse</th>
+						<th scope="col">Adresse complémentaire</th>
+						<th scope="col">Région</th>
+						<th scope="col">Num. Tél</th>
+						<th scope="col">Code Postal</th>
+						<th scope="col">Date d'arrêt</th>
 
-					<li class="page-item {% if i == form.nopage +1  %} active{% endif %}">
-						<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ i-1 }}">{{ i }}
+					</tr>
+				</thead>
+				<tbody>
+					{% for employeArchive in liste %}
+						<tr style="text-align:center;">
+							<td>{{employeArchive.id}}</td>
+							<td>{{employeArchive.nom}}</td>
+							<td>{{employeArchive.prenom}}</td>
+							<td>{{employeArchive.adresse}}</td>
+							<td>{{employeArchive.adresseBis}}</td>
+							<td>{{employeArchive.region}}</td>
+							<td>{{employeArchive.numTel}}</td>
+							<td>{{employeArchive.codePostal}}</td>
+							<td>{{employeArchive.dateArret | date("d-m-Y")}}</td>
+						{% endfor %}
+					</tbody>
+				</tbody>
+			</table>
+			{% set nb = form.nbpages %}
+			<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-center m-4 p-4">
+					<li class="page-item {% if form.nopage == 0  %}disabled{% endif %}">
+						<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ 0 }}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
+					{% for i in 1..nb %}
 
-				{% endfor %}
-				<li class="page-item {% if form.nopage == form.nbpages-1  %}disabled{% endif %}">
-					<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ nb-1 }}" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
+						<li class="page-item {% if i == form.nopage +1  %} active{% endif %}">
+							<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ i-1 }}">{{ i }}
+							</a>
+						</li>
+
+					{% endfor %}
+					<li class="page-item {% if form.nopage == form.nbpages-1  %}disabled{% endif %}">
+						<a class="page-link" href="index.php?page=accueil&item=2&nopage={{ nb-1 }}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
 		{% endif %}
 	</div>
 {% elseif session.role == "Chef de projet"%}
