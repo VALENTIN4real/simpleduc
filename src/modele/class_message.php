@@ -7,12 +7,12 @@ class Message{
     public function __construct($db){        
         $this->db = $db;
         $this->getMessages = $db->prepare("SELECT * FROM Message WHERE destinataire=:destinataire");
-        $this->send = $db->prepare("INSERT INTO Message(expediteur,destinataire,objet,contenu) VALUES(:expediteur,:destinataire,:objet,:contenu)");
+        $this->send = $db->prepare("INSERT INTO Message(expediteur,destinataire,objet,contenu,dateEnvoi) VALUES(:expediteur,:destinataire,:objet,:contenu,:dateEnvoi)");
     }
 
-    public function send($expediteur,$destinataire,$objet,$contenu){ // Étape 3         
+    public function send($expediteur,$destinataire,$objet,$contenu,$dateEnvoi){ // Étape 3         
         $r = true;        
-        $this->send->execute(array(':expediteur'=>$expediteur,':destinataire'=>$destinataire,':objet'=>$objet,':contenu'=>$contenu));        
+        $this->send->execute(array(':expediteur'=>$expediteur,':destinataire'=>$destinataire,':objet'=>$objet,':contenu'=>$contenu,':dateEnvoi'=>$dateEnvoi));        
         if ($this->send->errorCode()!=0){
             print_r($this->send->errorInfo());               
             $r=false;        

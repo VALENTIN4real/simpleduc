@@ -51,17 +51,20 @@
 	<br>
 
 	<div class="center container">
-		{% for message in listeMessage %}
-
-			<div id="rcorners3">
-				<div class="center">De:
-					{{message.expediteur}}</div>
-				<div class="center">Objet:
-					{{message.objet}}</div>
-				<div class="bottom">Reçu le: 10/10/21</div>
-			</div>
-			<br>
-		{% endfor %}
+		{% if listeMessage|length > 0%}
+			{% for message in listeMessage %}
+				<div id="rcorners3">
+					<div class="center">De:
+						{{message.expediteur}}</div>
+					<div class="center">Objet:
+						{{message.objet}}</div>
+					<div class="bottom">Reçu le: 10/10/21</div>
+				</div>
+				<br>
+			{% endfor %}
+		{% else %}
+			<h2>Aucun message</h2>
+		{% endif %}
 	</div>
 	<div class="center">
 		<button id="newMessageButton" class="button button4">Nouveau message</button>
@@ -83,7 +86,7 @@
 							<label>Destinataire :</label>
 							<select id="listeDestinataire" name="destinataireInput">
 								{% for destinataire in listeDestinataire %}
-									<option value="{{destinataire.nom}}">{{destinataire.nom}}</option>
+									<option value="{{destinataire.email}}">{{destinataire.email}}</option>
 								{% endfor %}
 							</select>
 						</div>
