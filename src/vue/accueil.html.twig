@@ -75,7 +75,7 @@
 			{% endif %}
 			<div class="container">
 				<div class="row">
-					<div class="col-4 bg-light rounded">
+					<div class="col-4 rounded">
 						<h1 style="text-align:center;">Créer un compte</h1>
 						<form action="index.php?page=accueil" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation">
 							<div class="form-group">
@@ -149,7 +149,7 @@
 
 			<div class="col-1"></div>
 
-			<div class="table-responsive col-7  bg-light rounded border">
+			<div class="table-responsive col-7 rounded border">
 				<h1 style="text-align:center;">Liste des utilisateurs</h1>
 
 
@@ -251,7 +251,7 @@
 
 {% endif %}{% elseif form.item == "2" %}
 {% if session.role == "Ressources Humaines" %}
-	<div class="container bg-light">
+	<div class="container">
 		<h1 style="text-align:center">Archive des anciens employés</h1>
 		{% if liste|length == 0 %}
 		<h2 class="text-center">Archive vide</h2>
