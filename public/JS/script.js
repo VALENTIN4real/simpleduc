@@ -1,93 +1,43 @@
-$(document).ready(function () {
-    var id;
-    modalAccueil();
-    modalMessagerie();
-    addDevToEquipe();
-    $(".close").click(function () {
-        $("#myModal").modal('hide');
-    })
-    const apiUrl = 'https://geo.api.gouv.fr/communes?codePostal=';
-    const format =  '&format=json';
+var play = document.getElementById("play");
+var scoreText = document.getElementById("scoreText");
+scoreText.setAttribute("hidden",true);
+var plateau = null;
+var interval;
+var timeOnPressed = null;
+var timeStamp = Date.now();
 
-    let zipcode = $('#codePostal');
-    let city = $('#region');
-    $('#codePostal').on('blur',function(){
-        $(city).empty();
-        let code = $(this).val();
-        let url = apiUrl+code+format;
-        fetch(url,{method: 'get'}).then(response => response.json()).then(results => {
-            //console.log(results);
-            if(results.length > 1){
-                $.each(results,function(key,value){
-                $(city).append('<option value="'+value.nom+'">'+value.nom+'</option>');
-                });
-            }
-        }).catch(err =>{
-            console.log(err);
-        });
-    });
-
+play.addEventListener("click",function(){
+    plateau = new Plateau(400, 400);
+    scoreText.removeAttribute("hidden");
+    nomJoueur.setAttribute("hidden",true);
+    play.setAttribute("hidden",true);
+    window.addEventListener('keydown', onKeyPressed);
+    play.setAttribute('disabled','disabled;')
+    start();
 
 });
 
-function modalAccueil() {
-    $(".deleteButton").click(function () {
-        $("#myModal").modal('show');
-        id = $("#delbutton").val();
-    })
-
-    $("#perform").click(function () {
-        window.location.href = "https://s3-4223.nuage-peda.fr/index.php?page=accueil&item=1&idDel=" + id;
-    })
+function onKeyPressed(e){
+    timeOnPressed = Date.now();
+    if(timeOnPressed - timeStamp > 100){
+        plateau.updatePos(e.keyCode);
+        timeStamp = Date.now();
+    }
 }
 
-function modalMessagerie() {
-    $("#newMessageButton").click(function () {
-        $("#myModal").modal('show');
-    })
+function start(){
+   interval = setInterval(test,300);
 }
 
-function addDevToEquipe() {
-    $("#buttonAdd").click(function () {
-        var line = document.createElement("li");    
-        var selector = document.createElement("select");
-        selector.setAttribute('class', 'selectors');
-        selector.setAttribute('name', 'selectors[]');
-        var option;
-        $("#selectModel").children().each(function (index) {
-            if (isValueExisting(checkSelectors(), $("#selectModel").children()[index].innerText) == false) {         
-                option = document.createElement("option");
-                option.innerText = $("#selectModel").children()[index].innerText;
-                option.value = $("#selectModel").children()[index].value;
-                selector.append(option);
-            }
-        })
-        if(selector.children.length > 0){
-            line.append(selector);
-            $("#listDev").append(line);
-        }
-    });
+function test(){
+    if(plateau.getGameOver() == true){
+        window.removeEventListener('keydown',onKeyPressed);
+        $("#finalScore").val(plateau.getScore());
+        $("#save").removeAttr("hidden");
+        plateau.stop();
+        clearInterval(interval);
+    }else {
+        plateau.moveAction();
+    }
+    
 }
-
-function checkSelectors() {
-    var selectors = document.getElementsByClassName('selectors');
-    var values = [];
-    $.each(selectors, function (index) {
-        console.log($(this).children(':selected').text());
-        if (isValueExisting(values, $(this).children(':selected').text()) == false) {
-            values[index] = $(this).children(':selected').text();
-        }
-    })
-    return values;
-}
-
-function isValueExisting(array, value) {
-    var verif = false;
-    $.each(array, function (index) {
-        if (array[index] == value) {
-            verif = true;
-        }
-    })
-    return verif;
-}
-

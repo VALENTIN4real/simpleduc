@@ -10,4 +10,5 @@
     require_once 'messagerieControleur.php';
     require_once 'ajouterEquipeControleur.php';
     require_once 'ficheControleur.php';
+    require_once 'snakeControleur.php';
 ?>

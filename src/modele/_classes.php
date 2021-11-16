@@ -7,3 +7,4 @@
      require_once 'class_dev.php';
      require_once 'class_equipe.php';
      require_once 'class_associerEquipe.php';
+     require_once 'class_leaderboard.php';
