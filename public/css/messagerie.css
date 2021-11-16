@@ -1,8 +1,44 @@
-#rcorners2 {
-    border-radius: 15px 50px 30px;
-    background: #73AD21;
+#rcorners3 {
+    position: relative;
+    border-radius: 15px 50px;
+    background: #50FAAA;
     padding: 20px;
-    width: 200px;
+    width: fill;
     height: 150px;
-  }
+}
 
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container {
+    border: solid 3px grey;
+    border-radius: 12px;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.button4 {
+    border-radius: 12px;
+}
