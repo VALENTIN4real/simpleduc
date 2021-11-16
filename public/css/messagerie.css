@@ -1,7 +1,7 @@
 #rcorners3 {
     position: relative;
-    border-radius: 15px 50px;
-    background: #50FAAA;
+    border-radius: 15px 27px;
+    background: #8ad6e9;
     padding: 20px;
     width: fill;
     height: 150px;
@@ -28,7 +28,7 @@
 }
 
 .button {
-    background-color: #04AA6D;
+    background-color: #0489aa;
     border: none;
     color: white;
     padding: 20px;
