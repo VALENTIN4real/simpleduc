@@ -218,7 +218,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="btn btn-default close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<p>Êtes-vous sûr de vouloir supprimer cet utilisateur?</p>
@@ -261,7 +261,7 @@
 					<div class="card-body">
 						<h5 class="card-title">Pas de groupe attitré</h5>
 						<p class="card-text">{{projet.nomEquipe}}</p>
-						<a href="#!" class="btn btn-primary">Attribuer un groupe</a>
+						<a href="?page=attribuerProjet&id={{projet.id}}" class="btn btn-primary">Attribuer un groupe</a>
 					</div>
 					<div class="card-footer text-muted">
 						{% if projet.date != null %}
@@ -287,7 +287,7 @@
 				</div>
 				<div class="card-body">
 					<h5 class="card-title">Groupe attitré</h5>
-					<p class="card-text">{{projet.nomEquipe}}</p>
+					<a href="?page=accueil&item=1"><p class="card-text">{{projet.nomEquipe}}</p></a>
 					<a href="#!" class="btn btn-primary">Voir le projet</a>
 				</div>
 				<div class="card-footer text-muted">

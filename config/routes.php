@@ -16,6 +16,7 @@ function getPage($db){
     $lesPages['ajout-equipe'] = "ajouterEquipeControleur";
     $lesPages['fiche-de-paie'] = "ficheControleur";
     $lesPages['snake'] = "snakeControleur";
+    $lesPages['attribuerProjet'] = "attribuerProjetControleur";
 
     if($db!=null){
         if (isset($_GET['page'])){

@@ -18,7 +18,8 @@ class AssocierEquipe{
             $r=false;        
         }        
         return $r; 
-    }     
+    }    
+    
 }
 
 ?>

@@ -11,4 +11,5 @@
     require_once 'ajouterEquipeControleur.php';
     require_once 'ficheControleur.php';
     require_once 'snakeControleur.php';
+    require_once 'attribuerProjetControleur.php';
 ?>

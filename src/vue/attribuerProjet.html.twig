@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	Attribuer un projet
+{% endblock %}
+
+{% block contenu %}
+	{% if form.valide is defined %}
+		{% if form.valide == false %}
+			<div class="alert alert-danger" role="alert">
+				{{form.message}}
+			</div>
+		{% endif %}
+	{% endif %}
+	<h1 style="text-align:center;">Attribuer une équipe au projet
+		{{projetActuel.designation}}
+	</h1>
+	<form action="index.php?page=attribuerProjet" method="post" enctype="application/x-www-form-urlencoded">
+		<h2>Choisir une équipe de développement</h2>
+		<label for="group" class="sr-only">Equipe:</label>
+		<select type="text" id="groupes" name="groupeChosen" class="form-control" required>
+			{% for equipe in listeEquipe %}
+				{% if groupeChosen is defined %}
+					{% if groupeChosen.id == equipe.id %}
+						<option value="{{equipe.id}}" selected>{{equipe.nomEquipe}}</option>
+					{% else %}
+						<option value="{{equipe.id}}">{{equipe.nomEquipe}}</option>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</select>
+	</br>
+	{% if groupeChosen is defined %}
+		<div class="container">
+			<div class="row">
+				{% for dev in listDev %}
+					<div class="col-sm">
+						<div class="card text-center" style="width:200px;">
+							<div class="container">
+								<div id="rcorners3">
+									<div class="center">Développeur
+									</div>
+									<div class="center">Nom:{{dev.nom}}
+									</div>
+									<div class="center">Prénom:{{dev.prenom}}
+									</div>
+									<br>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" name="attribuer">Attribuer</button>
+		
+	</form>
+
+	<input type="hidden" id="groupeId"></input>
+	<input type="hidden" id="idProjet" value="{{projetActuel.id}}" name="idProjet"></input>
+
+<script src="JS/projet.js"></script>{% endblock %}
