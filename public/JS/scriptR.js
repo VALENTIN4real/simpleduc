@@ -35,7 +35,7 @@ function modalAccueil() {
     })
 
     $("#perform").click(function() {
-        window.location.href = "https://s3-4223.nuage-peda.fr/index.php?page=accueil&item=1&idDel=" + id;
+        window.location.href = "index.php?page=accueil&item=1&idDel=" + id;
     })
 }
 

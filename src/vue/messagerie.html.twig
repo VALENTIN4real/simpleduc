@@ -13,9 +13,10 @@
 		<table class="table">
 			<thead>
 				<tr style="text-align:center;">
-					<th>Expéditeur</th>
+					<th colspan="1">Expéditeur</th>
 					<th>Objet</th>
-					<th>Date de réception</th>
+					<th colspan="5">Message</th>
+					<th colspan="1">Date de réception</th>
 				<tr>
 			</thead>
 			<tbody>
@@ -23,8 +24,8 @@
 					<tr style="text-align:center;" class="message" id="{{message.id}}">
 						<td>{{message.expediteur}}</td>
 						<td>{{message.objet}}</td>
-						<td>{{message.dateEnvoi | date("d/m/Y")}}</td>
-						<td colspan="3" id="{{message.id}}" style="display:none; ">{{message.contenu}}</td>
+						<td colspan="5" id="{{message.id}}">{{message.contenu}}</td>
+						<td colspan="1">{{message.dateEnvoi | date("d/m/Y")}}</td>
 					</tr>
 			{% endfor %}
 			</tbody>
