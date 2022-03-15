@@ -6,6 +6,8 @@ function accueilControleur($twig,$db){
     $listeRole = array();
     $listeEmployeArchives = array();
     $listeEquipe = array();
+    $listeProjet = array();
+    $listeProjetEnCours = array();
     if($_SESSION['login'] == null){
         header("Location:?page=connexion");     
     }
@@ -19,6 +21,7 @@ function accueilControleur($twig,$db){
         $idCompte = $employe->getIDAccount($id);
         $idCompte = intval($idCompte[0],10);
         $employe->delete($id);
+
         $compte = new Compte($db);
         $compte->delete($idCompte);
 
@@ -119,6 +122,9 @@ function accueilControleur($twig,$db){
 
 
     }else if($_SESSION['role'] == "Chef de projet"){
+        $projet = new Projet($db);
+        $listeProjet = $projet->getAllProjets();
+        $listeProjetEnCours = $projet->getStartedProjets();
         $equipe = new Equipe($db);
         $limite=5;
         if(!isset($_GET['nopage'])){
@@ -136,6 +142,7 @@ function accueilControleur($twig,$db){
         $form['nbpages'] = ceil($nb/$limite);
         $form['nopage'] = $nopage;
     }
-    echo $twig->render('accueil.html.twig', array('form' => $form,'liste'=>$liste, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,'listeEmployeArchives'=>$listeEmployeArchives,'listeEquipe'=>$listeEquipe));
+    echo $twig->render('accueil.html.twig', array('form' => $form,'liste'=>$liste, 'listeEmploye' => $listeEmploye, 'listeRole' => $listeRole,
+    'listeEmployeArchives'=>$listeEmployeArchives,'listeEquipe'=>$listeEquipe,'listeProjet'=>$listeProjet,'listeProjetsEnCours'=>$listeProjetEnCours));
 }
 ?>

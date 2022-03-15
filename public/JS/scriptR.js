@@ -31,7 +31,8 @@ $(document).ready(function() {
 function modalAccueil() {
     $(".deleteButton").click(function() {
         $("#myModal").modal('show');
-        id = $("#delbutton").val();
+        id = this.value;
+        console.log(id);
     })
 
     $("#perform").click(function() {

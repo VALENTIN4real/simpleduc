@@ -4,12 +4,14 @@ class Dev{
     private $insert;
     private $getAllDevs;
     private $getDevByID;
+    private $getAllDevsFromAGroup;
 
     public function __construct($db){        
         $this->db = $db;
         $this->insert = $db->prepare("INSERT INTO Developpeur(idEmploye)VALUES(:id)");
         $this->getAllDevs = $db->prepare("SELECT * FROM Developpeur, Employe WHERE idEmploye = id");
         $this->getDevByID = $db->prepare("SELECT * FROM Developpeur, Employe WHERE idEmploye = id AND idEmploye=:id");
+        $this->getAllDevsFromAGroup = $db->prepare("SELECT * FROM Developpeur D, AssocierEquipe A,Employe E  WHERE D.idEmploye = A.idEmploye AND D.idEmploye = E.id AND A.idEquipe=:id");
     }
 
 
@@ -37,6 +39,14 @@ class Dev{
             print_r($this->getDevByID->errorInfo());          
         }        
         return $this->getDevByID->fetch();    
+    }
+
+    public function getAllDevsFromAGroup($id){        
+        $this->getAllDevsFromAGroup->execute(array(':id'=>$id));        
+        if ($this->getAllDevsFromAGroup->errorCode()!=0){             
+            print_r($this->getAllDevsFromAGroup->errorInfo());          
+        }        
+        return $this->getAllDevsFromAGroup->fetchAll();    
     }
 }
 

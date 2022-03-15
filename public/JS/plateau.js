@@ -8,13 +8,19 @@ class Plateau {
         this.ctx.fillStyle = "#000000";
         this.ctx.fillRect(0, 0, 400, 400);
         this.plateau = [];
+        this.difficulty = document.getElementById("difficulty").value;
         this.gameover = false;
         this.eaten = false;
         this.head = new Head(this.ctx);
         this.snake = [this.head];
+        this.bodyColor = this.generateRandomColors();
         this.restart();
 
 
+    }
+
+    getDifficulty(){
+        return this.difficulty;
     }
 
     getScore() {
@@ -43,7 +49,8 @@ class Plateau {
         } else if (head instanceof Head) {
             this.ctx.fillStyle = "#FFAA00";
         } else {
-            this.ctx.fillStyle = "green";
+            this.ctx.fillStyle = this.bodyColor;
+            
         }
         this.ctx.fillRect(head.getX() * head.getWidth(), head.getY() * head.getHeight(), head.getWidth(), head.getHeight());
     }
@@ -235,12 +242,9 @@ class Plateau {
         var coords;
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                console.log(lastBody.getX() + j);
-                console.log(lastBody.getY() + i);
                 if (lastBody.getX() + j >= 0 && lastBody.getX() + j <= 9 && lastBody.getY() + i >= 0 && lastBody.getY() + i <= 9) {
                     if (this.plateau[lastBody.getY() + i][lastBody.getX() + j] == 0) {
                         coords = [lastBody.getX() + j, lastBody.getY() + i];
-                        console.log(coords);
                         break;
                     }
 
@@ -268,7 +272,6 @@ class Plateau {
             this.head.setX(this.head.getX() - 1);
         } else if (this.head.getMovement() == "down") {
             this.head.setY(this.head.getY() + 1);
-            console.log("test");
         } else {
             this.head.setY(this.head.getY() - 1);
         }
@@ -282,10 +285,7 @@ class Plateau {
                 this.plateau[this.head.getY()][this.head.getX()] = this.head;
                 this.updateBodyPos();
                 if (this.eaten == true) {
-                    console.log(this.plateau);
                     this.spawnViande();
-                    console.log("ojefofzkel");
-                    console.log(this.plateau);
                     this.eaten = false;
                 }
                 this.clearCTX();
@@ -303,6 +303,24 @@ class Plateau {
             this.plateau[i] = table;
         }
         this.clearCTX();
+    }
+
+    generateRandomColors(){
+        var colorsToNotTake = ["#FFAA00","#FF0000","#000000"];
+        var colorBody = null;
+        var verif = null;
+        do{
+            verif = true;
+            colorBody = "#"+Math.floor(Math.random()*16777215).toString(16);
+            colorsToNotTake.forEach(function(color){
+                if(color == colorBody){
+                    verif = false;    
+                }
+            });
+        }while(!verif);
+
+        return colorBody;
+       
     }
 
 
