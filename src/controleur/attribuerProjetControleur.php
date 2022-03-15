@@ -10,6 +10,7 @@ function attribuerProjetControleur($twig,$db){
     if(isset($_GET['id'])){
         
     }
+
     if(isset($_GET['groupe'])){
         $groupeChosen['valide'] = true;
         $groupeChosen['id'] = $_GET['groupe'];
@@ -19,9 +20,9 @@ function attribuerProjetControleur($twig,$db){
     }
 
     if(isset($_POST['attribuer'])){
-        $selectGroupe = $_POST['groupeChosen'];
-        $id = $_POST['idProjet'];
-        $projet->update($id,$selectGroupe);
+        var_dump($_POST['idProjet'],$_POST['groupeChosen']);
+        $projet->update($_POST['idProjet'],$_POST['groupeChosen']);
+        header('Location:?page=accueil');    
     }
    
     echo $twig->render('attribuerProjet.html.twig',array('projetActuel'=>$projetActuel,'listeEquipe'=>$listeEquipe,'groupeChosen'=>$groupeChosen,'listDev'=>$listeDevFromGroup));

@@ -9,22 +9,33 @@
 
 	<div class="center container">
 		{% if listeMessage|length > 0%}
+		<div class="table-responsive container">
+		<table class="table">
+			<thead>
+				<tr style="text-align:center;">
+					<th>Expéditeur</th>
+					<th>Objet</th>
+					<th>Date de réception</th>
+				<tr>
+			</thead>
+			<tbody>
 			{% for message in listeMessage %}
-				<div id="rcorners3">
-					<div class="center">De:
-						{{message.expediteur}}</div>
-					<div class="center">Objet:
-						{{message.objet}}</div>
-					<div class="bottom">Reçu le: 10/10/21</div>
-				</div>
-				<br>
+					<tr style="text-align:center;" class="message" id="{{message.id}}">
+						<td>{{message.expediteur}}</td>
+						<td>{{message.objet}}</td>
+						<td>{{message.dateEnvoi | date("d/m/Y")}}</td>
+						<td colspan="3" id="{{message.id}}" style="display:none; ">{{message.contenu}}</td>
+					</tr>
 			{% endfor %}
+			</tbody>
+		</table>
+		</div>
 		{% else %}
 			<h2>Aucun message</h2>
 		{% endif %}
 	</div>
 	<div class="center">
-		<button id="newMessageButton" class="button button4">Nouveau message</button>
+		<button id="newMessageButton" class="btn btn-primary">Nouveau message</button>
 	</div>
 
 	<div class="modal fade" id="myModal" role="dialog">

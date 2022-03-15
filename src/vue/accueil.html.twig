@@ -75,7 +75,7 @@
 			{% endif %}
 			<div class="container">
 				<div class="row">
-					<div class="col-4 rounded">
+					<div class="col-4 rounded border">
 						<h1 style="text-align:center;">Créer un compte</h1>
 						<form action="index.php?page=accueil" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation">
 							<div class="form-group">
@@ -100,12 +100,16 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="username">Numéro de téléphone</label>
+								<label for="inputMail">Adresse mail</label>
+								<input type="email" class="form-control" id="inputMail" name="inputEmail" aria-describedby="emailHelp" placeholder="Adresse mail" required>
+								<div class="valid-feedback">
+									Semble correct!
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="numTel">Numéro de téléphone</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="numTel" name="inputTel" placeholder="Numéro de téléphone" required>
-									<div class="invalid-feedback">
-										Veuillez saisir un numéro de téléphone valide.
-									</div>
 								</div>
 							</div>
 							<label for="inputFonction">Fonction</label>
@@ -185,8 +189,8 @@
 									</a>
 									<div></div>
 									{% if employe.estInactif == 1 %}
-										<button id="delbutton" value="{{employe.id}}">
-											<span class="material-icons deleteButton">delete</span>
+										<button class="deleteButton" id="delButton" value="{{employe.id}}">
+											{{employe.id}}
 										</button>
 									{% endif %}
 								</td>

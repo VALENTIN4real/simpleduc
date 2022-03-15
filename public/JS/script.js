@@ -7,7 +7,7 @@ var interval;
 var timeOnPressed = null;
 var timeStamp = Date.now();
 
-play.addEventListener("click",function(){
+play.addEventListener("click", function() {
     plateau = new Plateau(400, 400);
     scoreText.removeAttribute("hidden");
     nomJoueur.setAttribute("hidden",true);
@@ -19,9 +19,9 @@ play.addEventListener("click",function(){
 
 });
 
-function onKeyPressed(e){
+function onKeyPressed(e) {
     timeOnPressed = Date.now();
-    if(timeOnPressed - timeStamp > 100){
+    if (timeOnPressed - timeStamp > 100) {
         plateau.updatePos(e.keyCode);
         timeStamp = Date.now();
     }
@@ -38,16 +38,16 @@ function start(plateau){
     }
 }
 
-function test(){
-    if(plateau.getGameOver() == true){
-        window.removeEventListener('keydown',onKeyPressed);
+function test() {
+    if (plateau.getGameOver() == true) {
+        window.removeEventListener('keydown', onKeyPressed);
         $("#finalScore").val(plateau.getScore());
         $("#save").removeAttr("hidden");
         $("#replay").removeAttr("hidden");
         plateau.stop();
         clearInterval(interval);
-    }else {
+    } else {
         plateau.moveAction();
     }
-    
+
 }

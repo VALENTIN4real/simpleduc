@@ -21,6 +21,7 @@ function accueilControleur($twig,$db){
         $idCompte = $employe->getIDAccount($id);
         $idCompte = intval($idCompte[0],10);
         $employe->delete($id);
+
         $compte = new Compte($db);
         $compte->delete($idCompte);
 
