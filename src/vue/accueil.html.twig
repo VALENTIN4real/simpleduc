@@ -32,12 +32,6 @@
 								<a class="page-link" href="?page=accueil&item=2">Archives</a>
 							</li>
 						{% endif %}
-						<li class="page-item">
-							<a class="page-link" href="https://la1ere.francetvinfo.fr/guadeloupe/le-vaccinobus-nouvel-outil-de-la-proximite-vaccinale-1095034.html">VACCIBUS</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="https://www.huffingtonpost.fr/entry/vaccination-la-richesse-ou-les-diplomes-insuffisants-pour-expliquer-le-choix-de-ceux-qui-decident-de-ne-pas-le-faire_fr_61166e34e4b07c1403142492">Se vacciner pour devenir un bon français</a>
-						</li>
 
 					{% elseif session.role == "Développeur"%}
 
@@ -75,7 +69,7 @@
 			{% endif %}
 			<div class="container">
 				<div class="row">
-					<div class="col-4 rounded border">
+					<div class="col-sm-3 col-12 rounded border">
 						<h1 style="text-align:center;">Créer un compte</h1>
 						<form action="index.php?page=accueil" method="post" enctype="application/x-www-form-urlencoded" class="needs-validation">
 							<div class="form-group">
@@ -153,7 +147,7 @@
 
 			<div class="col-1"></div>
 
-			<div class="table-responsive col-7 rounded border">
+			<div class="table-responsive col-sm-8 col-12 rounded border">
 				<h1 style="text-align:center;">Liste des utilisateurs</h1>
 
 
